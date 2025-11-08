@@ -1,24 +1,24 @@
-import { forwardRef, useEffect, useId, useImperativeHandle, useLayoutEffect, useMemo } from "react";
+import { forwardRef, useEffect, useId, useImperativeHandle, useLayoutEffect, useMemo } from 'react';
 
-import type { AnyExtension, Editor as CoreEditor } from "@tiptap/core";
-import type { UseEditorOptions } from "@tiptap/react";
-import { EditorContent, useEditor } from "@tiptap/react";
-import { differenceBy, throttle } from "lodash-es";
+import type { AnyExtension, Editor as CoreEditor } from '@tiptap/core';
+import type { UseEditorOptions } from '@tiptap/react';
+import { EditorContent, useEditor } from '@tiptap/react';
+import { differenceBy, throttle } from 'lodash-es';
 
-import { BubbleMenu, Toolbar, TooltipProvider } from "@/components";
-import CharactorCount from "@/components/CharactorCount";
-import { Toaster } from "@/components/ui/toaster";
-import { EDITOR_UPDATE_WATCH_THROTTLE_WAIT_TIME } from "@/constants";
-import { RESET_CSS } from "@/constants/resetCSS";
-import { editableEditorActions } from "@/store/editableEditor";
-import { ProviderRichText } from "@/store/ProviderRichText";
-import { themeActions } from "@/theme/theme";
-import type { BubbleMenuProps, ToolbarProps } from "@/types";
-import { removeCSS, updateCSS } from "@/utils/dynamicCSS";
-import { hasExtension } from "@/utils/utils";
+import { BubbleMenu, Toolbar, TooltipProvider } from '@/components';
+import CharactorCount from '@/components/CharactorCount';
+import { Toaster } from '@/components/ui/toaster';
+import { EDITOR_UPDATE_WATCH_THROTTLE_WAIT_TIME } from '@/constants';
+import { RESET_CSS } from '@/constants/resetCSS';
+import { editableEditorActions } from '@/store/editableEditor';
+import { ProviderRichText } from '@/store/ProviderRichText';
+import { themeActions } from '@/theme/theme';
+import type { BubbleMenuProps, ToolbarProps } from '@/types';
+import { removeCSS, updateCSS } from '@/utils/dynamicCSS';
+import { hasExtension } from '@/utils/utils';
 
-import "../styles/index.scss";
-import clsx from "clsx";
+import '../styles/index.scss';
+import clsx from 'clsx';
 
 /**
  * Interface for RichTextEditor component props
@@ -30,7 +30,7 @@ export interface RichTextEditorProps {
   extensions: AnyExtension[];
 
   /** Output format */
-  output: "html" | "json" | "text";
+  output: 'html' | 'json' | 'text';
   /** Model value */
   modelValue?: string | object;
   /** Dark mode flag */
@@ -80,7 +80,7 @@ function RichTextEditor(props: RichTextEditorProps, ref: React.ForwardedRef<{ ed
   const id = useId();
 
   const sortExtensions = useMemo(() => {
-    const diff = differenceBy(extensions, extensions, "name");
+    const diff = differenceBy(extensions, extensions, 'name');
     const exts = extensions.map((k: any) => {
       const find = extensions.find((ext: any) => ext.name === k.name);
       if (!find) {
@@ -114,8 +114,8 @@ function RichTextEditor(props: RichTextEditorProps, ref: React.ForwardedRef<{ ed
   });
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", props.dark);
-    themeActions.setTheme(id, props.dark ? "dark" : "light");
+    document.documentElement.classList.toggle('dark', props.dark);
+    themeActions.setTheme(id, props.dark ? 'dark' : 'light');
   }, [props.dark]);
 
   useEffect(() => {
@@ -125,38 +125,38 @@ function RichTextEditor(props: RichTextEditorProps, ref: React.ForwardedRef<{ ed
 
   useEffect(() => {
     if (props?.resetCSS !== false) {
-      updateCSS(RESET_CSS, "react-tiptap-reset");
+      updateCSS(RESET_CSS, 'react-tiptap-reset');
     }
 
     return () => {
-      removeCSS("react-tiptap-reset");
+      removeCSS('react-tiptap-reset');
     };
   }, [props?.resetCSS]);
 
-  function getOutput(editor: CoreEditor, output: RichTextEditorProps["output"]) {
+  function getOutput(editor: CoreEditor, output: RichTextEditorProps['output']) {
     if (props?.removeDefaultWrapper) {
-      if (output === "html") {
-        return editor.isEmpty ? "" : editor.getHTML();
+      if (output === 'html') {
+        return editor.isEmpty ? '' : editor.getHTML();
       }
-      if (output === "json") {
+      if (output === 'json') {
         return editor.isEmpty ? {} : editor.getJSON();
       }
-      if (output === "text") {
-        return editor.isEmpty ? "" : editor.getText();
+      if (output === 'text') {
+        return editor.isEmpty ? '' : editor.getText();
       }
-      return "";
+      return '';
     }
 
-    if (output === "html") {
+    if (output === 'html') {
       return editor.getHTML();
     }
-    if (output === "json") {
+    if (output === 'json') {
       return editor.getJSON();
     }
-    if (output === "text") {
+    if (output === 'text') {
       return editor.getText();
     }
-    return "";
+    return '';
   }
 
   useLayoutEffect(() => {
@@ -169,7 +169,7 @@ function RichTextEditor(props: RichTextEditorProps, ref: React.ForwardedRef<{ ed
     };
   }, []);
 
-  const hasExtensionValue = hasExtension(editor, "characterCount");
+  const hasExtensionValue = hasExtension(editor, 'characterCount');
 
   if (!editor) {
     return <></>;
@@ -181,13 +181,13 @@ function RichTextEditor(props: RichTextEditorProps, ref: React.ForwardedRef<{ ed
         <TooltipProvider delayDuration={0} disableHoverableContent>
           <div
             className={clsx(
-              "richtext-overflow-hidden richtext-rounded-[0.5rem] richtext-bg-background",
-              !props?.disabled && "richtext-shadow richtext-outline richtext-outline-1"
+              'richtext-overflow-hidden richtext-rounded-[0.5rem] richtext-bg-background',
+              !props?.disabled && 'richtext-shadow richtext-outline richtext-outline-1'
             )}>
             <div className="richtext-flex richtext-max-h-full richtext-w-full richtext-flex-col">
               {!props?.hideToolbar && <Toolbar disabled={!!props?.disabled} editor={editor} toolbar={props.toolbar} />}
 
-              <EditorContent className={`richtext-relative ${props?.contentClass || ""}`} editor={editor} />
+              <EditorContent className={`richtext-relative ${props?.contentClass || ''}`} editor={editor} />
 
               {hasExtensionValue && <CharactorCount editor={editor} extensions={extensions} />}
 

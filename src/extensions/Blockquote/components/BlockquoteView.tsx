@@ -1,7 +1,7 @@
-import { NodeViewWrapper } from "@tiptap/react";
-import React from "react";
-import AvatarQuote from "./avatar.png";
-import QuoteIcon from "./quote.png";
+import { NodeViewWrapper } from '@tiptap/react';
+import React from 'react';
+import AvatarQuote from './avatar.png';
+import QuoteIcon from './quote.png';
 interface BlockquoteViewProps {
   children: React.ReactNode;
 }
@@ -18,7 +18,9 @@ export const BlockquoteView: React.FC<BlockquoteViewProps> = (props: any) => {
             <img src={AvatarQuote} alt="Avatar" className="blockquote-avatar" />
           </div>
         </div>
-        <div className="richtext-italic">{props?.node?.attrs?.quoteContent || ""}</div>
+        <div className="richtext-italic">
+          {props?.node?.attrs?.quoteContent || ''}
+        </div>
       </div>
     </NodeViewWrapper>
   );

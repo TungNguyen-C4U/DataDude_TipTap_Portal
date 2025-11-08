@@ -15,7 +15,6 @@ import { ColumnActionButton } from 'reactjs-tiptap-editor/multicolumn'
 import { Emoji } from 'reactjs-tiptap-editor/emoji'
 import { ExportPdf } from 'reactjs-tiptap-editor/exportpdf'
 import { ExportWord } from 'reactjs-tiptap-editor/exportword'
-import { FontFamily } from 'reactjs-tiptap-editor/fontfamily'
 import { FontSize } from 'reactjs-tiptap-editor/fontsize'
 import { FormatPainter } from 'reactjs-tiptap-editor/formatpainter'
 import { Heading } from 'reactjs-tiptap-editor/heading'
@@ -25,7 +24,6 @@ import { HorizontalRule } from 'reactjs-tiptap-editor/horizontalrule'
 import { Iframe } from 'reactjs-tiptap-editor/iframe'
 import { Image } from 'reactjs-tiptap-editor/image'
 import { ImageGif } from 'reactjs-tiptap-editor/imagegif'
-import { ImportWord } from 'reactjs-tiptap-editor/importword'
 import { Indent } from 'reactjs-tiptap-editor/indent'
 import { Italic } from 'reactjs-tiptap-editor/italic'
 import { LineHeight } from 'reactjs-tiptap-editor/lineheight'
@@ -41,8 +39,6 @@ import { TableOfContents } from 'reactjs-tiptap-editor/tableofcontent'
 import { TaskList } from 'reactjs-tiptap-editor/tasklist'
 import { TextAlign } from 'reactjs-tiptap-editor/textalign'
 import { TextUnderline } from 'reactjs-tiptap-editor/textunderline'
-import { Video } from 'reactjs-tiptap-editor/video'
-import { TextDirection } from 'reactjs-tiptap-editor/textdirection'
 import { Katex } from 'reactjs-tiptap-editor/katex'
 import { Drawer } from 'reactjs-tiptap-editor/drawer'
 import { Excalidraw } from 'reactjs-tiptap-editor/excalidraw'
@@ -84,7 +80,6 @@ const extensions = [
   TableOfContents,
   FormatPainter.configure({ spacer: true }),
   Clear,
-  FontFamily,
   Heading.configure({ spacer: true }),
   FontSize,
   Bold,
@@ -116,15 +111,6 @@ const extensions = [
       })
     },
   }),
-  Video.configure({
-    upload: (files: File) => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(URL.createObjectURL(files))
-        }, 500)
-      })
-    },
-  }),
   ImageGif.configure({
     GIPHY_API_KEY: import.meta.env.VITE_GIPHY_API_KEY as string,
   }),
@@ -142,17 +128,7 @@ const extensions = [
   Table,
   Iframe,
   ExportPdf.configure({ spacer: true }),
-  ImportWord.configure({
-    upload: (files: File[]) => {
-      const f = files.map(file => ({
-        src: URL.createObjectURL(file),
-        alt: file.name,
-      }))
-      return Promise.resolve(f)
-    },
-  }),
   ExportWord,
-  TextDirection,
   Mention,
   Attachment.configure({
     upload: (file: any) => {
@@ -230,19 +206,17 @@ function App() {
     })
   }, [])
   return (
-    <RichTextEditor
-      ref={editorRef}
-      output="html"
-      content=""
-      hideBubble
-      hideToolbar
-      disableBubble
-      contentClass="content"
-      extensions={extensions}
-      dark={false}
-      disabled
-      removeDefaultWrapper
-    />
+    <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
+      <h1>Rich Text Editor - Test UI</h1>
+      <RichTextEditor
+        ref={editorRef}
+        output="html"
+        content="<p>Nhấn '/' để biết lệnh</p>"
+        contentClass="content"
+        extensions={extensions}
+        dark={false}
+      />
+    </div>
   )
 }
 
