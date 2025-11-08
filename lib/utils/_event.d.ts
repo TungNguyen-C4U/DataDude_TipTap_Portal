@@ -1,0 +1,13 @@
+export declare const OPEN_COUNT_SETTING_MODAL = "OPEN_COUNT_SETTING_MODAL";
+export declare const OPEN_LINK_SETTING_MODAL = "OPEN_LINK_SETTING_MODAL";
+export declare const OPEN_FLOW_SETTING_MODAL = "OPEN_FLOW_SETTING_MODAL";
+export declare const OPEN_MIND_SETTING_MODAL = "OPEN_MIND_SETTING_MODAL";
+export declare const OPEN_EXCALIDRAW_SETTING_MODAL = "OPEN_EXCALIDRAW_SETTING_MODAL";
+export declare const OPEN_DRAWER_SETTING_MODAL = "OPEN_DRAWER_SETTING_MODAL";
+export declare function subject(eventName: any, handler: any): void;
+export declare function cancelSubject(eventName: any, handler: any): void;
+export declare function triggerOpenCountSettingModal(data: any): void;
+export declare function triggerOpenLinkSettingModal(data: any): void;
+export declare function triggerOpenFlowSettingModal(data: any): void;
+export declare function triggerOpenMindSettingModal(data: any): void;
+export declare function triggerOpenExcalidrawSettingModal(data: any): void;

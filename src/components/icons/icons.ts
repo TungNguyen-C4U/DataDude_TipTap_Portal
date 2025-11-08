@@ -72,7 +72,6 @@ import {
   Underline,
   Undo2,
   Unlink,
-  Video,
   ZoomIn,
   ZoomOut,
   PencilRuler,
@@ -93,18 +92,13 @@ import {
 } from '@/components/icons';
 import { ColumnAddLeft } from '@/components/icons/ColumnAddLeft';
 import { ColumnAddRight } from '@/components/icons/ColumnAddRight';
-import { Direction } from '@/components/icons/Direction';
 import { Excalidraw } from '@/components/icons/Excalidraw';
 import { ExportPdf } from '@/components/icons/ExportPdf';
 import ExportWord from '@/components/icons/ExportWord';
 import { GifIcon } from '@/components/icons/GIfIcon';
-import { LeftToRight } from '@/components/icons/LeftToRight';
 import { Mermaid } from '@/components/icons/Mermaid';
-import { RightToLeft } from '@/components/icons/RightToLeft';
 import { Twitter } from '@/components/icons/Twitter';
 import { CodeView } from '@/components/icons/CodeView';
-
-import ImportWord from './ImportWord';
 
 export const icons = {
   Bold,
@@ -136,7 +130,6 @@ export const icons = {
   ListTodo,
   Link,
   ImageUp,
-  Video,
   Maximize,
   Minimize,
   Table,
@@ -188,7 +181,6 @@ export const icons = {
   KatexIcon: Sigma,
   ExportPdf,
   ExportWord,
-  ImportWord,
   ColumnAddLeft,
   ColumnAddRight,
   BookMarked,
@@ -197,10 +189,6 @@ export const icons = {
   ZoomOut,
   Settings,
   Eye,
-
-  TextDirection: Direction,
-  LeftToRight,
-  RightToLeft,
 
   Attachment: Paperclip,
   GifIcon,
