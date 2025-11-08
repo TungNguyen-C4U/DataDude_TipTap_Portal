@@ -3,10 +3,9 @@ import { Fragment, useMemo } from 'react';
 import type { Editor } from '@tiptap/react';
 import { BubbleMenu as BubbleMenuReact } from '@tiptap/react';
 
-import { Separator, getBubbleImage, getBubbleImageGif, getBubbleVideo } from '@/components';
+import { Separator, getBubbleImage, getBubbleImageGif } from '@/components';
 import { Image } from '@/extensions/Image';
 import {  ImageGif } from '@/extensions/ImageGif';
-import { Video } from '@/extensions/Video';
 import { useLocale } from '@/locales';
 
 interface IPropsBubbleMenu {
@@ -53,10 +52,6 @@ function isImageNode(node: any) {
 
 function isImageGifNode(node: any) {
   return node.type.name === ImageGif.name;
-}
-
-function isVideoNode(node: any) {
-  return node.type.name === Video.name;
 }
 
 function BubbleMenuImage(props: IPropsBubbleMenu) {
@@ -175,63 +170,4 @@ function BubbleMenuImageGif(props: IPropsBubbleMenu) {
   );
 }
 
-function BubbleMenuVideo(props: IPropsBubbleMenu) {
-  const { lang } = useLocale();
-
-  const shouldShow = ({ editor }: any) => {
-    const { selection } = editor.view.state;
-    const { $from, to } = selection;
-    let isVideo = false;
-
-    editor.view.state.doc.nodesBetween($from.pos, to, (node: any) => {
-      if (isVideoNode(node)) {
-        isVideo = true;
-        return false;
-      }
-    });
-
-    return isVideo;
-  };
-
-  const items = useMemo(() => {
-    if (props.disabled) {
-      return [];
-    }
-
-    return getBubbleVideo(props.editor);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.editor, props.disabled, lang]);
-
-  return (
-    <>
-      <BubbleMenuReact
-        editor={props?.editor}
-        shouldShow={shouldShow}
-        tippyOptions={tippyOptions as any}
-      >
-        {items?.length
-          ? (
-            <div className="richtext-pointer-events-auto richtext-w-auto richtext-select-none richtext-rounded-sm !richtext-border richtext-border-neutral-200 richtext-bg-background richtext-px-3 richtext-py-2 richtext-shadow-sm richtext-transition-all dark:richtext-border-neutral-800">
-              <div className="richtext-relative richtext-flex richtext-h-[26px] richtext-flex-nowrap richtext-items-center richtext-justify-start richtext-whitespace-nowrap">
-                {items?.map((item: any, key: any) => {
-                  return (
-                    <ItemA
-                      disabled={props.disabled}
-                      editor={props.editor}
-                      item={item}
-                      key={`bubbleMenu-video-${key}`}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          )
-          : (
-            <></>
-          )}
-      </BubbleMenuReact>
-    </>
-  );
-}
-
-export { BubbleMenuImage, BubbleMenuVideo, BubbleMenuImageGif };
+export { BubbleMenuImage, BubbleMenuImageGif };

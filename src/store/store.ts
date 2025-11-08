@@ -6,10 +6,6 @@ const { Provider: ProviderUploadImage, useStore: useStoreUploadImage } = createF
   value: false
 });
 
-const { Provider: ProviderUploadVideo, useStore: useStoreUploadVideo } = createFastContext({
-  value: false
-});
-
 const { Provider: ProviderEditableEditor, useStore: useStoreEditableEditor } = createFastContext({
   value: false
 });
@@ -23,9 +19,6 @@ export const atomID = createSignal('0');
 export {
   ProviderUploadImage,
   useStoreUploadImage,
-
-  ProviderUploadVideo,
-  useStoreUploadVideo,
 
   ProviderEditableEditor,
   useStoreEditableEditor,

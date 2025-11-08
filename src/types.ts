@@ -33,7 +33,6 @@ export type ExtensionNameKeys =
   | 'indent'
   | 'link'
   | 'image'
-  | 'video'
   | 'table'
   | 'blockquote'
   | 'horizontalRule'
@@ -270,8 +269,6 @@ export interface NameValueOption<T = string> {
   name: string
   value: T
 }
-
-export type VideoAlignment = 'flex-start' | 'center' | 'flex-end';
 
 export type PaperSize = 'Legal' | 'Letter' | 'Tabloid' | 'A0' | 'A1' | 'A2' | 'A3' | 'A4' | 'A5';
 

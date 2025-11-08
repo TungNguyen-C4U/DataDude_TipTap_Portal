@@ -99,25 +99,6 @@ export const COLORS_LIST = [
   '#780650',
 ] as const;
 
-/** Default font family list */
-export const DEFAULT_FONT_FAMILY_LIST = [
-  'Inter',
-  'Comic Sans MS, Comic Sans',
-  'serif',
-  'cursive',
-  'Arial',
-  'Arial Black',
-  'Georgia',
-  'Impact',
-  'Tahoma',
-  'Times New Roman',
-  'Verdana',
-  'Courier New',
-  'Lucida Console',
-  'Monaco',
-  'monospace',
-];
-
 /** Default font size list */
 export const DEFAULT_FONT_SIZE_LIST = [
   '10px',
@@ -146,12 +127,6 @@ export enum IMAGE_SIZE {
   'size-large' = '100%',
 }
 
-/** Options for setting video size in the bubble menu */
-export enum VIDEO_SIZE {
-  'size-small' = 480,
-  'size-medium' = 640,
-  'size-large' = '100%',
-}
 
 /** Line Height List */
 export const DEFAULT_LINE_HEIGHT_LIST = ['100%', '115%', '150%', '200%', '250%', '300%'];
