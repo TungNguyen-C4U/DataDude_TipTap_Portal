@@ -16,6 +16,7 @@ import { Emoji } from 'reactjs-tiptap-editor/emoji'
 import { ExportPdf } from 'reactjs-tiptap-editor/exportpdf'
 import { ExportWord } from 'reactjs-tiptap-editor/exportword'
 import { FontSize } from 'reactjs-tiptap-editor/fontsize'
+import { FontFamily } from 'reactjs-tiptap-editor/fontfamily'
 import { FormatPainter } from 'reactjs-tiptap-editor/formatpainter'
 import { Heading } from 'reactjs-tiptap-editor/heading'
 import { Highlight } from 'reactjs-tiptap-editor/highlight'
@@ -79,6 +80,7 @@ const extensions = [
   SearchAndReplace,
   TableOfContents,
   FormatPainter.configure({ spacer: true }),
+  FontFamily,
   Clear,
   Heading.configure({ spacer: true }),
   FontSize,
@@ -206,17 +208,19 @@ function App() {
     })
   }, [])
   return (
-    <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
-      <h1>Rich Text Editor - Test UI</h1>
-      <RichTextEditor
-        ref={editorRef}
-        output="html"
-        content="<p>Nhấn '/' để biết lệnh</p>"
-        contentClass="content"
-        extensions={extensions}
-        dark={false}
-      />
-    </div>
+    <RichTextEditor
+      ref={editorRef}
+      output="html"
+      content=""
+      hideBubble
+      hideToolbar
+      disableBubble
+      contentClass="content"
+      extensions={extensions}
+      dark={false}
+      disabled
+      removeDefaultWrapper
+    />
   )
 }
 

@@ -1,1 +1,0 @@
-export declare function getFileTypeIcon(fileType: string, forProseMirror?: boolean): any[] | import("react/jsx-runtime").JSX.Element;
