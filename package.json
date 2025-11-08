@@ -219,16 +219,6 @@
         "default": "./lib/ExportWord.js"
       }
     },
-    "./fontfamily": {
-      "require": {
-        "types": "./lib/FontFamily.d.cts",
-        "default": "./lib/FontFamily.cjs"
-      },
-      "import": {
-        "types": "./lib/FontFamily.d.ts",
-        "default": "./lib/FontFamily.js"
-      }
-    },
     "./fontsize": {
       "require": {
         "types": "./lib/FontSize.d.cts",
@@ -317,16 +307,6 @@
       "import": {
         "types": "./lib/ImageGif.d.ts",
         "default": "./lib/ImageGif.js"
-      }
-    },
-    "./importword": {
-      "require": {
-        "types": "./lib/ImportWord.d.cts",
-        "default": "./lib/ImportWord.cjs"
-      },
-      "import": {
-        "types": "./lib/ImportWord.d.ts",
-        "default": "./lib/ImportWord.js"
       }
     },
     "./indent": {
@@ -539,16 +519,6 @@
         "default": "./lib/TextBubble.js"
       }
     },
-    "./textdirection": {
-      "require": {
-        "types": "./lib/TextDirection.d.cts",
-        "default": "./lib/TextDirection.cjs"
-      },
-      "import": {
-        "types": "./lib/TextDirection.d.ts",
-        "default": "./lib/TextDirection.js"
-      }
-    },
     "./textunderline": {
       "require": {
         "types": "./lib/TextUnderline.d.cts",
@@ -577,16 +547,6 @@
       "import": {
         "types": "./lib/Twitter.d.ts",
         "default": "./lib/Twitter.js"
-      }
-    },
-    "./video": {
-      "require": {
-        "types": "./lib/Video.d.cts",
-        "default": "./lib/Video.cjs"
-      },
-      "import": {
-        "types": "./lib/Video.d.ts",
-        "default": "./lib/Video.js"
       }
     }
   },
@@ -647,9 +607,6 @@
       "./exportword": [
         "./lib/ExportWord.d.ts"
       ],
-      "./fontfamily": [
-        "./lib/FontFamily.d.ts"
-      ],
       "./fontsize": [
         "./lib/FontSize.d.ts"
       ],
@@ -676,9 +633,6 @@
       ],
       "./imagegif": [
         "./lib/ImageGif.d.ts"
-      ],
-      "./importword": [
-        "./lib/ImportWord.d.ts"
       ],
       "./indent": [
         "./lib/Indent.d.ts"
@@ -743,9 +697,6 @@
       "./textbubble": [
         "./lib/TextBubble.d.ts"
       ],
-      "./textdirection": [
-        "./lib/TextDirection.d.ts"
-      ],
       "./textunderline": [
         "./lib/TextUnderline.d.ts"
       ],
@@ -754,9 +705,6 @@
       ],
       "./twitter": [
         "./lib/Twitter.d.ts"
-      ],
-      "./video": [
-        "./lib/Video.d.ts"
       ]
     }
   },

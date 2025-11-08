@@ -18,8 +18,11 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        setCodeBlock: {
-            setCodeBlock: (options?: any) => ReturnType;
+        codeView: {
+            /**
+                   * Toggle code view mode
+                   */
+            toggleCodeView: () => ReturnType;
         };
     }
 }
@@ -27,11 +30,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        codeView: {
-            /**
-                   * Toggle code view mode
-                   */
-            toggleCodeView: () => ReturnType;
+        setCodeBlock: {
+            setCodeBlock: (options?: any) => ReturnType;
         };
     }
 }
@@ -61,15 +61,6 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        excalidraw: {
-            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
         exportPdf: {
             exportToPdf: () => ReturnType;
         };
@@ -79,17 +70,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        exportWord: {
-            exportToWord: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        painter: {
-            setPainter: (marks: Mark[]) => ReturnType;
+        excalidraw: {
+            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
         };
     }
 }
@@ -108,6 +90,24 @@ declare module '@tiptap/core' {
              * Unset the font size
              */
             unsetFontSize: () => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        exportWord: {
+            exportToWord: () => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        painter: {
+            setPainter: (marks: Mark[]) => ReturnType;
         };
     }
 }
@@ -247,22 +247,6 @@ declare module '@tiptap/core' {
         tableOfContents: {
             setTableOfContents: () => ReturnType;
             removeTableOfContents: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        video: {
-            /**
-             * Add an video
-             */
-            setVideo: (options: Partial<SetVideoOptions>) => ReturnType;
-            /**
-             * Update an video
-             */
-            updateVideo: (options: Partial<SetVideoOptions>) => ReturnType;
         };
     }
 }

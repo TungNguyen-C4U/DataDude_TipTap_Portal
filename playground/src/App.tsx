@@ -22,7 +22,6 @@ import { Color } from 'reactjs-tiptap-editor/color';
 import { ColumnActionButton } from 'reactjs-tiptap-editor/multicolumn';
 import { Emoji } from 'reactjs-tiptap-editor/emoji';
 import { ExportPdf } from 'reactjs-tiptap-editor/exportpdf';
-import { FontFamily } from 'reactjs-tiptap-editor/fontfamily';
 import { FontSize } from 'reactjs-tiptap-editor/fontsize';
 import { FormatPainter } from 'reactjs-tiptap-editor/formatpainter';
 import { Heading } from 'reactjs-tiptap-editor/heading';
@@ -87,7 +86,6 @@ const extensions = [
   TableOfContents,
   FormatPainter.configure({ spacer: true }),
   Clear,
-  FontFamily,
   Heading.configure({ spacer: true }),
   FontSize,
   Bold,
