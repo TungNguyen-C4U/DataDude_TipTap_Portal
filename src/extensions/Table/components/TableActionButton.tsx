@@ -3,13 +3,11 @@ import React from 'react';
 import { ActionButton } from '@/components';
 import CreateTablePopover from '@/extensions/Table/components/CreateTablePopover';
 import type { ButtonViewReturnComponentProps } from '@/types';
-import type { TooltipContentProps } from '@radix-ui/react-tooltip';
 
 interface IPropsTableActionButton {
   editor: any
   icon?: any
   tooltip?: string
-  tooltipOptions?: TooltipContentProps
   disabled?: boolean
   color?: string
   action?: ButtonViewReturnComponentProps['action']
@@ -32,7 +30,6 @@ function TableActionButton(props: IPropsTableActionButton) {
       <ActionButton
         icon={props?.icon}
         tooltip={props?.tooltip}
-        tooltipOptions={props?.tooltipOptions}
         disabled={props?.disabled}
         color={props?.color}
         action={props?.action}

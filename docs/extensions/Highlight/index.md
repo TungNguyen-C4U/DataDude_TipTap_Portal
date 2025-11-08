@@ -23,19 +23,3 @@ const extensions = [
   Highlight // [!code ++]
 ];
 ```
-
-## Options
-
-### shortcutKeys
-
-Type: `string[]`\
-Default: `['⇧', 'mod', 'H']`
-
-Keyboard shortcuts for the extension.
-
-### defaultColor
-
-Type: `string`\
-Default: `none`
-
-The initial color used in the action button. If not provided, no color is selected.

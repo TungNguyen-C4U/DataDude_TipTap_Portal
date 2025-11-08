@@ -3,6 +3,8 @@ import type { Extensions } from '@tiptap/core';
 
 import { Image } from '@/extensions/Image';
 import { actionDialogImage } from '@/extensions/Image/store';
+import { Video } from '@/extensions/Video';
+import { actionDialogVideo } from '@/extensions/Video/store';
 import { localeActions } from '@/locales';
 
 import type { SlashCommandOptions } from './SlashCommand';
@@ -115,6 +117,21 @@ export function renderGroups(extensions: Extensions, renderGroupItem?: SlashComm
           editor.chain().focus().deleteRange(range).run();
 
           actionDialogImage.setOpen(editor.id, true);
+        },
+      });
+    }
+
+    if (extension.name.toLowerCase() === Video.name) {
+      groups[1].commands.push({
+        name: 'video',
+        label: localeActions.t('editor.video.tooltip'),
+        iconName: 'Video',
+        description: 'Insert a video',
+        aliases: ['video', 'sp', 'shipin'],
+        shouldBeHidden: editor => editor.isActive('columns'),
+        action: ({ editor, range }: any) => {
+          editor.chain().focus().deleteRange(range).run();
+          actionDialogVideo.setOpen(editor.id, true);
         },
       });
     }

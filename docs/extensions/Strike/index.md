@@ -23,12 +23,3 @@ const extensions = [
   Strike // [!code ++]
 ];
 ```
-
-## Options
-
-### shortcutKeys
-
-Type: `string[]`\
-Default: `['shift', 'mod', 'S']`
-
-Keyboard shortcuts for the extension.

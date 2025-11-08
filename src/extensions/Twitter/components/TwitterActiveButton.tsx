@@ -1,14 +1,12 @@
 import { ActionButton, IconComponent, Popover, PopoverContent, PopoverTrigger } from '@/components';
 import FormEditLinkTwitter from '@/extensions/Twitter/components/FormEditLinkTwitter';
 import type { ButtonViewReturnComponentProps } from '@/types';
-import type { TooltipContentProps } from '@radix-ui/react-tooltip';
 
 interface IPropsTwitterActiveButton {
   editor: any
   icon?: any
   title?: string
   tooltip?: string
-  tooltipOptions?: TooltipContentProps
   disabled?: boolean
   shortcutKeys?: string[]
   isActive?: ButtonViewReturnComponentProps['isActive']
@@ -27,7 +25,6 @@ function TwitterActiveButton(props: IPropsTwitterActiveButton) {
       <PopoverTrigger disabled={props?.disabled} asChild>
         <ActionButton
           tooltip={props?.tooltip}
-          tooltipOptions={props?.tooltipOptions}
           isActive={props?.isActive}
           disabled={props?.disabled}
         >

@@ -4,7 +4,6 @@ import { ActionButton, IconComponent } from '@/components';
 import { Popover, PopoverContent, PopoverTrigger, Toggle, Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui';
 import type { ButtonViewReturnComponentProps } from '@/types';
 import { getShortcutKey } from '@/utils/plateform';
-import type { TooltipContentProps } from '@radix-ui/react-tooltip';
 
 export interface Item {
   title: string
@@ -24,7 +23,6 @@ interface IPropsTextAlignMenuButton {
   maxHeight?: string | number
   icon?: any
   tooltip?: string
-  tooltipOptions?: TooltipContentProps
   items?: Item[]
 }
 
@@ -56,7 +54,6 @@ function TextAlignMenuButton(props: IPropsTextAlignMenuButton) {
           disabled={props?.disabled}
           icon={props?.icon}
           tooltip={props?.tooltip}
-          tooltipOptions={props?.tooltipOptions}
         >
           <IconComponent className="richtext-ml-1 richtext-size-3 richtext-text-zinc-500"
             name="MenuDown"

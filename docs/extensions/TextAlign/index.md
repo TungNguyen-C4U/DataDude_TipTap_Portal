@@ -23,12 +23,3 @@ const extensions = [
   TextAlign // [!code ++]
 ];
 ```
-
-## Options
-
-### shortcutKeys
-
-Type: `string[][]`\
-Default: `[['mod', 'shift', 'L'], ['mod', 'shift', 'E'], ['mod', 'shift', 'R'], ['mod', 'shift', 'J']]`
-
-Keyboard shortcuts for the extension (left, center, right & justify).

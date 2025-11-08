@@ -11,7 +11,6 @@ import {
 } from '@/components';
 import type { ButtonViewReturnComponentProps } from '@/types';
 import { getShortcutKey } from '@/utils/plateform';
-import type { TooltipContentProps } from '@radix-ui/react-tooltip';
 
 export interface Item {
   title: string
@@ -33,7 +32,6 @@ interface Props {
   shortcutKeys?: string[]
   maxHeight?: string | number
   tooltip?: string
-  tooltipOptions?: TooltipContentProps
   items?: Item[]
 }
 
@@ -64,7 +62,6 @@ function HeadingButton(props: Props) {
           icon="MenuDown"
           title={active?.title}
           tooltip={props?.tooltip}
-          tooltipOptions={props?.tooltipOptions}
         />
       </DropdownMenuTrigger>
 

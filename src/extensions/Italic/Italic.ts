@@ -1,3 +1,4 @@
+import type { Editor } from '@tiptap/core';
 import type { ItalicOptions as TiptapItalicOptions } from '@tiptap/extension-italic';
 import TiptapItalic from '@tiptap/extension-italic';
 
@@ -10,14 +11,14 @@ export const Italic = /* @__PURE__ */ TiptapItalic.extend<ItalicOptions>({
   addOptions() {
     return {
       ...this.parent?.(),
-      button({ editor, t, extension }) {
+      button({ editor, t }: { editor: Editor, t: (...args: any[]) => string }) {
         return {
           component: ActionButton,
           componentProps: {
             action: () => editor.commands.toggleItalic(),
             isActive: () => editor.isActive('italic') || false,
             disabled: false,
-            shortcutKeys: extension.options.shortcutKeys ?? ['mod', 'I'],
+            shortcutKeys: ['mod', 'I'],
             icon: 'Italic',
             tooltip: t('editor.italic.tooltip'),
           },

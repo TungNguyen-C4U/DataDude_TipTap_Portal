@@ -23,12 +23,3 @@ const extensions = [
   MoreMark // [!code ++]
 ];
 ```
-
-## Options
-
-### shortcutKeys
-
-Type: `string[][]`\
-Default: `[['mod', '.'], ['mod', ',']]`
-
-Keyboard shortcuts for the extension.

@@ -27,7 +27,7 @@ export const Heading = /* @__PURE__ */ TiptapHeading.extend<HeadingOptions>({
           disabled: !editor.can().toggleHeading({ level }),
           title: t(`editor.heading.h${level}.tooltip`),
           level,
-          shortcutKeys: extension.options.shortcutKeys?.[level] ?? ['alt', 'mod', `${level}`],
+          shortcutKeys: ['alt', 'mod', `${level}`],
         }));
 
         if (baseKitExt && baseKitExt.options.paragraph !== false) {
@@ -37,7 +37,7 @@ export const Heading = /* @__PURE__ */ TiptapHeading.extend<HeadingOptions>({
             disabled: !editor.can().setParagraph(),
             level: 0,
             title: t('editor.paragraph.tooltip'),
-            shortcutKeys: extension.options.shortcutKeys?.[0] ?? ['alt', 'mod', '0'],
+            shortcutKeys: ['alt', 'mod', '0'],
           });
         }
 

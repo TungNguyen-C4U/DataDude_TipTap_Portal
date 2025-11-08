@@ -12,14 +12,14 @@ export const OrderedList = /* @__PURE__ */ TiptapOrderedList.extend<OrderedListO
   addOptions() {
     return {
       ...this.parent?.(),
-      button: ({ editor, t, extension }) => ({
+      button: ({ editor, t }) => ({
         component: ActionButton,
         componentProps: {
           action: () => editor.commands.toggleOrderedList(),
           isActive: () => editor.isActive('orderedList') || false,
           disabled: false,
           icon: 'ListOrdered',
-          shortcutKeys: extension.options.shortcutKeys ?? ['mod', 'shift', '7'],
+          shortcutKeys: ['mod', 'shift', '7'],
           tooltip: t('editor.orderedlist.tooltip'),
         },
       }),

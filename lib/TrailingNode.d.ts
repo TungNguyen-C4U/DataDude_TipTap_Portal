@@ -26,18 +26,6 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        codeView: {
-            /**
-                   * Toggle code view mode
-                   */
-            toggleCodeView: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
         setCodeBlock: {
             setCodeBlock: (options?: any) => ReturnType;
         };
@@ -47,11 +35,11 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        emoji: {
-            setEmoji: (emoji: {
-                name: string;
-                emoji: string;
-            }) => ReturnType;
+        codeView: {
+            /**
+                   * Toggle code view mode
+                   */
+            toggleCodeView: () => ReturnType;
         };
     }
 }
@@ -69,8 +57,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        exportPdf: {
-            exportToPdf: () => ReturnType;
+        excalidraw: {
+            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
         };
     }
 }
@@ -78,8 +66,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        excalidraw: {
-            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
+        exportWord: {
+            exportToWord: () => ReturnType;
         };
     }
 }
@@ -105,8 +93,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        exportWord: {
-            exportToWord: () => ReturnType;
+        painter: {
+            setPainter: (marks: Mark[]) => ReturnType;
         };
     }
 }
@@ -114,8 +102,11 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        painter: {
-            setPainter: (marks: Mark[]) => ReturnType;
+        emoji: {
+            setEmoji: (emoji: {
+                name: string;
+                emoji: string;
+            }) => ReturnType;
         };
     }
 }
@@ -194,9 +185,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        lineHeight: {
-            setLineHeight: (lineHeight: string) => ReturnType;
-            unsetLineHeight: () => ReturnType;
+        katex: {
+            setKatex: (arg?: IKatexAttrs) => ReturnType;
         };
     }
 }
@@ -204,8 +194,9 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        katex: {
-            setKatex: (arg?: IKatexAttrs) => ReturnType;
+        lineHeight: {
+            setLineHeight: (lineHeight: string) => ReturnType;
+            unsetLineHeight: () => ReturnType;
         };
     }
 }
@@ -270,6 +261,22 @@ declare module '@tiptap/core' {
              */
             setTweet: (options: SetTweetOptions) => ReturnType;
             updateTweet: (options: SetTweetOptions) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        video: {
+            /**
+             * Add an video
+             */
+            setVideo: (options: Partial<SetVideoOptions>) => ReturnType;
+            /**
+             * Update an video
+             */
+            updateVideo: (options: Partial<SetVideoOptions>) => ReturnType;
         };
     }
 }

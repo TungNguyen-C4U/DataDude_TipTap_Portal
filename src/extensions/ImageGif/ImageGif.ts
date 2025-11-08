@@ -19,11 +19,10 @@ export interface SetImageAttrsOptions {
 }
 
 interface ImageGifOptions extends ImageOptions {
-  provider: 'giphy' | 'tenor'
   /**
-   * The key for the gif https://giphy.com/ or https://tenor.com/
+   * The key for the gif https://giphy.com/
    */
-  API_KEY: string
+  GIPHY_API_KEY: string
 }
 
 declare module '@tiptap/core' {
@@ -54,14 +53,12 @@ export const ImageGif = /* @__PURE__ */ TiptapImage.extend<ImageGifOptions>({
       content: '',
       marks: '',
       group: 'block',
-      API_KEY: '',
-      provider: 'giphy',
+      GIPHY_API_KEY: '',
       draggable: false,
       selectable: true,
       atom: true,
       button: ({ editor, extension, t }: any) => {
-        const provider = extension?.options?.provider || '';
-        const apiKey = extension?.options?.API_KEY || '';
+        const giphyApiKey = extension?.options?.GIPHY_API_KEY || '';
 
         return {
           component: ImageGifActionButton,
@@ -74,8 +71,7 @@ export const ImageGif = /* @__PURE__ */ TiptapImage.extend<ImageGifOptions>({
             disabled: false,
             icon: 'GifIcon',
             tooltip: t('editor.imageGif.tooltip'),
-            apiKey,
-            provider
+            giphyApiKey,
           },
         };
       },

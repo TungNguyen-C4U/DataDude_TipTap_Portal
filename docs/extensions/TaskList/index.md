@@ -23,12 +23,3 @@ const extensions = [
   TaskList // [!code ++]
 ];
 ```
-
-## Options
-
-### shortcutKeys
-
-Type: `string[]`\
-Default: `['shift', 'mod', '9']`
-
-Keyboard shortcuts for the extension.

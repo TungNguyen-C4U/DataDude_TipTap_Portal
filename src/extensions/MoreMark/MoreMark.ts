@@ -38,7 +38,7 @@ export const MoreMark = /* @__PURE__ */ Extension.create<MoreMarkOptions>({
           disabled: !editor.can().toggleSubscript(),
           icon: 'Subscript',
           title: t('editor.subscript.tooltip'),
-          shortcutKeys: (extension.options.shortcutKeys?.[0] ?? ['mod', '.']) as string[],
+          shortcutKeys: ['mod', '.'],
         };
 
         const superBtn: Item = {
@@ -47,7 +47,7 @@ export const MoreMark = /* @__PURE__ */ Extension.create<MoreMarkOptions>({
           disabled: !editor.can().toggleSuperscript(),
           icon: 'Superscript',
           title: t('editor.superscript.tooltip'),
-          shortcutKeys: (extension.options.shortcutKeys?.[1] ?? ['mod', ',']) as string[],
+          shortcutKeys: ['mod', ','],
         };
         // const hasCode = hasExtension(editor, 'code');
 

@@ -5,9 +5,7 @@ import { ActionButton } from '@/components/ActionButton';
 import { TableOfContents } from '@/extensions/TableOfContent/TableOfContent';
 import { useActive } from '@/hooks/useActive';
 
-import type { TooltipContentProps } from '@radix-ui/react-tooltip';
-
-export function TableOfContentActionButton({ editor, icon, tooltip, tooltipOptions }: { editor: Editor, tooltip: string, icon: string, tooltipOptions?: TooltipContentProps }) {
+export function TableOfContentActionButton({ editor, icon, tooltip }: { editor: Editor, tooltip: string, icon: string }) {
   const isTaskListActive = useActive(editor, TableOfContents.name);
 
   const tableOfContent = useCallback(() => {
@@ -24,7 +22,6 @@ export function TableOfContentActionButton({ editor, icon, tooltip, tooltipOptio
       isActive={() => isTaskListActive || false}
       icon={icon}
       tooltip={tooltip}
-      tooltipOptions={tooltipOptions}
     />
   );
 }

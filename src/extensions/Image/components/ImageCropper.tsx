@@ -1,11 +1,11 @@
-import React, { useRef, useState, useMemo } from 'react';
+import React, { useRef, useState } from 'react';
 
 import ReactCrop, {
   type Crop,
   type PixelCrop,
 } from 'react-image-crop';
 
-import { IconComponent, useToast } from '@/components';
+import { IconComponent } from '@/components';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -17,14 +17,11 @@ import {
 import { Image as ExtensionImage } from '@/extensions/Image';
 import { useLocale } from '@/locales';
 import { dataURLtoFile, readImageAsBase64 } from '@/utils/file';
-import { validateFiles } from '@/utils/validateFile';
 
-export function ImageCropper({ editor, imageInline, onClose, disabled, alt }: any) {
+export function ImageCropper({ editor, imageInline, onClose }: any) {
   const { t } = useLocale();
-  const { toast } = useToast();
 
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [isCropping, setIsCropping] = useState(false);
 
   const imgRef = React.useRef<HTMLImageElement | null>(null);
 
@@ -35,12 +32,6 @@ export function ImageCropper({ editor, imageInline, onClose, disabled, alt }: an
     src: '',
     file: null,
   });
-
-  const uploadOptions = useMemo(() => {
-    return editor.extensionManager.extensions.find(
-      (extension: any) => extension.name === ExtensionImage.name,
-    )?.options;
-  }, [editor]);
 
   function onCropComplete(crop: PixelCrop) {
     if (imgRef.current && crop.width && crop.height) {
@@ -78,12 +69,13 @@ export function ImageCropper({ editor, imageInline, onClose, disabled, alt }: an
     return canvas.toDataURL('image/png', 1.0);
   }
 
-  const onCrop = React.useCallback(async () => {
-    if (isCropping) return;
-
-    setIsCropping(true);
+  async function onCrop() {
     try {
       const fileCrop = dataURLtoFile(croppedImageUrl, urlUpload?.file?.name || 'image.png');
+
+      const uploadOptions = editor.extensionManager.extensions.find(
+        (extension: any) => extension.name === ExtensionImage.name,
+      )?.options;
 
       let src = '';
       if (uploadOptions.upload) {
@@ -92,7 +84,7 @@ export function ImageCropper({ editor, imageInline, onClose, disabled, alt }: an
         src = URL.createObjectURL(fileCrop);
       }
 
-      editor.chain().focus().setImageInline({ src, inline: imageInline, alt }).run();
+      editor.chain().focus().setImageInline({ src, inline: imageInline }).run();
 
       setDialogOpen(false);
 
@@ -100,15 +92,11 @@ export function ImageCropper({ editor, imageInline, onClose, disabled, alt }: an
         src: '',
         file: null,
       });
-
-      resetFileInput();
       onClose();
     } catch (error) {
       console.log('Error cropping image', error);
-    } finally {
-      setIsCropping(false);
     }
-  }, [croppedImageUrl, editor, imageInline, isCropping, onClose, urlUpload?.file?.name, uploadOptions]);
+  }
 
   function handleClick(e: any) {
     e.preventDefault();
@@ -118,24 +106,10 @@ export function ImageCropper({ editor, imageInline, onClose, disabled, alt }: an
   const handleFile = async (event: any) => {
     const files = event?.target?.files;
     if (!editor || editor.isDestroyed || files.length === 0) {
-      event.target.value = '';
       return;
     }
+    const file = files[0];
 
-    const validFiles = validateFiles(files, {
-      acceptMimes: uploadOptions?.acceptMimes,
-      maxSize: uploadOptions?.maxSize,
-      t,
-      toast,
-      onError: uploadOptions.onError,
-    });
-
-    if (validFiles.length <= 0) {
-      event.target.value = '';
-      return;
-    }
-
-    const file = validFiles[0];
     const base64 = await readImageAsBase64(file);
 
     setDialogOpen(true);
@@ -145,32 +119,16 @@ export function ImageCropper({ editor, imageInline, onClose, disabled, alt }: an
     });
   };
 
-  const resetFileInput = () => {
-    if (fileInput.current) {
-      fileInput.current.value = '';
-    }
-  };
-
   return (
     <>
       <Button className="richtext-mt-1 richtext-w-full"
-        disabled={disabled}
         onClick={handleClick}
         size="sm"
       >
         {t('editor.image.dialog.tab.uploadCrop')}
       </Button>
 
-      <Dialog
-        open={dialogOpen}
-        onOpenChange={(open) => {
-          setDialogOpen(open);
-          if (!open) {
-            setUrlUpload({ src: '', file: null });
-            resetFileInput();
-          }
-        }}
-      >
+      <Dialog open={dialogOpen}>
         <DialogTrigger />
 
         <DialogContent>
@@ -197,57 +155,43 @@ export function ImageCropper({ editor, imageInline, onClose, disabled, alt }: an
 
           <DialogFooter>
             <Button
-              disabled={isCropping}
               onClick={() => {
                 setDialogOpen(false);
                 setUrlUpload({
                   src: '',
                   file: null,
                 });
-                resetFileInput();
               }}
             >
               {t('editor.imageUpload.cancel')}
 
-              <IconComponent className="richtext-ml-1"
+              <IconComponent className="richtext-ml-[4px]"
                 name="Trash2"
               />
             </Button>
 
-            <Button
-              className="richtext-w-fit"
-              disabled={isCropping || !crop}
+            <Button className="richtext-w-fit"
               onClick={onCrop}
             >
-              {isCropping ? (
-                <>
-                  {t('editor.imageUpload.uploading')}
+              {t('editor.imageUpload.crop')}
 
-                  <IconComponent className="richtext-ml-1 richtext-animate-spin"
-                    name="Loader"
-                  />
-                </>
-              ) : (
-                <>
-                  {t('editor.imageUpload.crop')}
-
-                  <IconComponent className="richtext-ml-1"
-                    name="Crop"
-                  />
-                </>
-              )}
+              <IconComponent className="richtext-ml-[4px]"
+                name="Crop"
+              />
             </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
 
       <input
-        accept={uploadOptions?.acceptMimes?.join(',') || 'image/*'}
-        multiple={false} // TODO No sense unless doing queue processing
+        accept="image/*"
+        multiple
         onChange={handleFile}
         ref={fileInput}
-        style={{ display: 'none' }}
         type="file"
+        style={{
+          display: 'none',
+        }}
       />
     </>
   );

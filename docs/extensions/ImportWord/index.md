@@ -37,12 +37,3 @@ const extensions = [
    ImportWord, // [!code ++]
 ];
 ```
-
-## Options
-
-### shortcutKeys
-
-Type: `string[]`\
-Default: `['alt', 'mod', 'S']`
-
-Keyboard shortcuts for the extension.

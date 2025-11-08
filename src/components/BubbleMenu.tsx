@@ -2,7 +2,7 @@ import React from 'react';
 
 import type { Editor } from '@tiptap/core';
 
-import { BubbleMenuImage, BubbleMenuImageGif, BubbleMenuLink, BubbleMenuText, ColumnsBubbleMenu, ContentMenu, TableBubbleMenu } from '@/components/menus';
+import { BubbleMenuImage, BubbleMenuImageGif, BubbleMenuLink, BubbleMenuText, BubbleMenuVideo, ColumnsBubbleMenu, ContentMenu, TableBubbleMenu } from '@/components/menus';
 import { BubbleMenuIframe } from '@/components/menus/components/BubbleMenuIframe';
 import { Image, } from '@/extensions/Image';
 import { ImageGif } from '@/extensions/ImageGif';
@@ -32,7 +32,6 @@ export function BubbleMenu({ editor, disabled, bubbleMenu }: BubbleMenuComponent
     extensionsNames.includes('table') && !bubbleMenu?.tableConfig?.hidden ? <TableBubbleMenu actions={bubbleMenu?.tableConfig?.actions}
       editor={editor}
       key="table"
-      hiddenActions={bubbleMenu?.tableConfig?.hiddenActions}
     /> : null,
     extensionsNames.includes('link') && !bubbleMenu?.linkConfig?.hidden ? <BubbleMenuLink disabled={disabled}
       editor={editor}
@@ -46,6 +45,11 @@ export function BubbleMenu({ editor, disabled, bubbleMenu }: BubbleMenuComponent
       editor={editor}
       key="imageGif"
     /> : null,
+    extensionsNames.includes('video') && !bubbleMenu?.videoConfig?.hidden ? <BubbleMenuVideo disabled={disabled}
+      editor={editor}
+      key="video"
+    /> : null,
+
     extensionsNames.includes('iframe') && !bubbleMenu?.iframeConfig?.hidden ? <BubbleMenuIframe disabled={disabled}
       editor={editor}
       key="iframe"

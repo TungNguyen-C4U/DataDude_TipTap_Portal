@@ -21,12 +21,3 @@ const extensions = [
   Italic // [!code ++]
 ];
 ```
-
-## Options
-
-### shortcutKeys
-
-Type: `string[]`\
-Default: `['mod', 'I']`
-
-Keyboard shortcuts for the extension.

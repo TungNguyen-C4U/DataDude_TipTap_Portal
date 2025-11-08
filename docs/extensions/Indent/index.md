@@ -21,12 +21,3 @@ const extensions = [
   Indent // [!code ++]
 ];
 ```
-
-## Options
-
-### shortcutKeys
-
-Type: `string[][]`\
-Default: `[['Tab'], ['Shift', 'Tab']]`
-
-Keyboard shortcuts for the extension.

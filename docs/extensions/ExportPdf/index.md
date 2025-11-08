@@ -22,6 +22,8 @@ const extensions = [
 ];
 ```
 
+Here’s the documentation in the same style:
+
 ---
 
 ## Options
@@ -29,7 +31,6 @@ const extensions = [
 ### paperSize
 
 Type: `PaperSize`
-
 Default: `'Letter'`
 
 Specifies the size of the paper used when exporting to PDF.
@@ -48,6 +49,8 @@ type PaperSize =
   | 'A4'
   | 'A5';
 ```
+
+---
 
 ### margins
 
@@ -127,12 +130,12 @@ Example usage:
 import { ExportPdf } from 'reactjs-tiptap-editor/exportpdf';
 
 ExportPdf.configure({
-  paperSize: 'A4',
+  paperSize: 'Letter',
   margins: {
     top: '1in',
-    right: '0.4in',
+    right: '1in',
     bottom: '1in',
-    left: '0.4in',
+    left: '1in',
   },
 });
 ```

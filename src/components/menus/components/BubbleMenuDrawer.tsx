@@ -83,43 +83,45 @@ function BubbleMenuDrawer(props: IPropsBubbleMenu) {
   }, [props.disabled, props.editor, lang]);
 
   return (
-    <BubbleMenuReact
-      editor={props?.editor}
-      shouldShow={shouldShow}
-      tippyOptions={tippyOptions as any}
-    >
-      {items?.length
-        ? (
-          <div className="richtext-pointer-events-auto richtext-w-auto richtext-select-none richtext-rounded-sm !richtext-border richtext-border-neutral-200 richtext-bg-background richtext-px-3 richtext-py-2 richtext-shadow-sm richtext-transition-all dark:richtext-border-neutral-800">
-            <div className="richtext-relative richtext-flex richtext-h-[26px] richtext-flex-nowrap richtext-items-center richtext-justify-start richtext-whitespace-nowrap">
-              {items?.map((item: any, key: any) => {
-                if (item.type === 'edit' && attrs?.src) {
+    <>
+      <BubbleMenuReact
+        editor={props?.editor}
+        shouldShow={shouldShow}
+        tippyOptions={tippyOptions as any}
+      >
+        {items?.length
+          ? (
+            <div className="richtext-pointer-events-auto richtext-w-auto richtext-select-none richtext-rounded-sm !richtext-border richtext-border-neutral-200 richtext-bg-background richtext-px-3 richtext-py-2 richtext-shadow-sm richtext-transition-all dark:richtext-border-neutral-800">
+              <div className="richtext-relative richtext-flex richtext-h-[26px] richtext-flex-nowrap richtext-items-center richtext-justify-start richtext-whitespace-nowrap">
+                {items?.map((item: any, key: any) => {
+                  if (item.type === 'edit' && attrs?.src) {
+                    return (
+                      <EditDrawerBlock
+                        attrs={attrs}
+                        editor={props.editor}
+                        extension={extension}
+                        key={`bubbleMenu-drawer-${key}`}
+                      />
+                    );
+                  }
+
                   return (
-                    <EditDrawerBlock
-                      attrs={attrs}
+                    <ItemA
+                      disabled={props.disabled}
                       editor={props.editor}
-                      extension={extension}
+                      item={item}
                       key={`bubbleMenu-drawer-${key}`}
                     />
                   );
-                }
-
-                return (
-                  <ItemA
-                    disabled={props.disabled}
-                    editor={props.editor}
-                    item={item}
-                    key={`bubbleMenu-drawer-${key}`}
-                  />
-                );
-              })}
+                })}
+              </div>
             </div>
-          </div>
-        )
-        : (
-          <></>
-        )}
-    </BubbleMenuReact>
+          )
+          : (
+            <></>
+          )}
+      </BubbleMenuReact>
+    </>
   );
 }
 

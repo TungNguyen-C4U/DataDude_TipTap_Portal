@@ -6,13 +6,13 @@ import CodeBlockActiveButton from '@/extensions/CodeBlock/components/CodeBlockAc
 import { NodeViewCodeBlock } from '@/extensions/CodeBlock/components/NodeViewCodeBlock/NodeViewCodeBlock';
 import { type GeneralOptions } from '@/types';
 
-export interface CodeBlockOptions extends GeneralOptions<CodeBlockOptions> { }
+export interface CodeBlockOptions extends GeneralOptions<CodeBlockOptions> {}
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     setCodeBlock: {
-      setCodeBlock: (options?: any) => ReturnType
-    }
+      setCodeBlock: (options?: any) => ReturnType;
+    };
   }
 }
 
@@ -55,7 +55,7 @@ export const CodeBlock = /* @__PURE__ */ Node.create({
         default: '',
         parseHTML: (element) => {
           return element.textContent || '';
-        }
+        },
       },
       language: {
         default: 'plaintext',
@@ -64,16 +64,16 @@ export const CodeBlock = /* @__PURE__ */ Node.create({
         default: true,
       },
       wordWrap: {
-        default: false,
+        default: true,
       },
       tabSize: {
-        default: 2
+        default: 2,
       },
       shouldFocus: {
         default: true,
         parseHTML: () => false,
-        renderHTML: false
-      }
+        renderHTML: false,
+      },
     };
   },
   parseHTML() {
@@ -83,28 +83,24 @@ export const CodeBlock = /* @__PURE__ */ Node.create({
         preserveWhitespace: 'full',
         getAttrs: (node: HTMLElement) => {
           return {
-            code: node.textContent || ''
+            code: node.textContent || '',
           };
-        }
+        },
       },
       {
         tag: 'pre code',
         preserveWhitespace: 'full',
         getAttrs: (node: HTMLElement) => {
           return {
-            code: node.textContent || ''
+            code: node.textContent || '',
           };
-        }
-      }
+        },
+      },
     ];
   },
   renderHTML({ HTMLAttributes, node }) {
     const code = node.attrs.code || node.content.firstChild?.text || '';
-    return [
-      'pre',
-      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
-      ['code', {}, code]
-    ];
+    return ['pre', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), ['code', {}, code]];
   },
   addNodeView() {
     return ReactNodeViewRenderer(NodeViewCodeBlock);
@@ -118,7 +114,7 @@ export const CodeBlock = /* @__PURE__ */ Node.create({
               type: this.name,
               attrs: {
                 ...options,
-                shouldFocus: true
+                shouldFocus: true,
               },
             });
           },
@@ -134,14 +130,14 @@ export const CodeBlock = /* @__PURE__ */ Node.create({
       textblockTypeInputRule({
         find: backtickInputRegex,
         type: this.type,
-        getAttributes: match => ({
+        getAttributes: (match) => ({
           language: match[1],
         }),
       }),
       textblockTypeInputRule({
         find: tildeInputRegex,
         type: this.type,
-        getAttributes: match => ({
+        getAttributes: (match) => ({
           language: match[1],
         }),
       }),

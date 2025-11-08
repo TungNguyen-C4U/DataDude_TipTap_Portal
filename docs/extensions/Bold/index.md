@@ -23,12 +23,3 @@ const extensions = [
   Bold // [!code ++]
 ];
 ```
-
-## Options
-
-### shortcutKeys
-
-Type: `string[]`\
-Default: `['mod', 'B']`
-
-Keyboard shortcuts for the extension.

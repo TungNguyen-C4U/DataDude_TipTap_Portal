@@ -1,4 +1,5 @@
 import { Extension } from '@tiptap/core';
+import type { Editor } from '@tiptap/core';
 
 import { ActionButton } from '@/components';
 import type { GeneralOptions } from '@/types';
@@ -33,7 +34,7 @@ export const Indent = /* @__PURE__ */ Extension.create<IndentOptions>({
       types: ['paragraph', 'heading', 'blockquote'],
       minIndent: IndentProps.min,
       maxIndent: IndentProps.max,
-      button({ editor, t, extension }) {
+      button({ editor, t }: { editor: Editor, t: (...args: any[]) => string }) {
         return [
           {
             component: ActionButton,
@@ -41,7 +42,7 @@ export const Indent = /* @__PURE__ */ Extension.create<IndentOptions>({
               action: () => {
                 editor.commands.indent();
               },
-              shortcutKeys: extension.options.shortcutKeys?.[0] ?? ['Tab'],
+              shortcutKeys: ['Tab'],
               icon: 'IndentIncrease',
               tooltip: t('editor.indent.tooltip'),
             },
@@ -52,7 +53,7 @@ export const Indent = /* @__PURE__ */ Extension.create<IndentOptions>({
               action: () => {
                 editor.commands.outdent();
               },
-              shortcutKeys: extension.options.shortcutKeys?.[1] ?? ['Shift', 'Tab'],
+              shortcutKeys: ['Shift', 'Tab'],
               icon: 'IndentDecrease',
               tooltip: t('editor.outdent.tooltip'),
             },

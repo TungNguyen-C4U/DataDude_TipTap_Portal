@@ -33,6 +33,7 @@ export type ExtensionNameKeys =
   | 'indent'
   | 'link'
   | 'image'
+  | 'video'
   | 'table'
   | 'blockquote'
   | 'horizontalRule'
@@ -58,8 +59,6 @@ export interface GeneralOptions<T> {
   button: ButtonView<T>
   /** Show on Toolbar */
   toolbar?: boolean
-  /** Shortcut keys override */
-  shortcutKeys?: string[] | string[][]
 }
 
 /**
@@ -125,22 +124,17 @@ export interface BubbleMenuRenderProps {
   extensionsNames: string[]
 }
 
-export interface TableMenuConfig {
+export interface BubbleMenuConfig {
   /**
      * @description Column menu hidden
      * @default false
      */
   hidden?: boolean
-
   /**
    * custom menu actions
    */
   actions?: ActionButtonProps[]
 
-  /**
-   * hidden default actions, if any
-   */
-  hiddenActions?: string[]
 }
 
 /**
@@ -154,7 +148,7 @@ export interface BubbleMenuProps {
      */
     hidden?: boolean
   }
-  tableConfig?: TableMenuConfig
+  tableConfig?: BubbleMenuConfig
   floatingMenuConfig?: {
     /**
      * @description Floating menu hidden
@@ -261,14 +255,15 @@ export interface ToolbarRenderProps {
   disabled: boolean
 }
 export interface ToolbarProps {
-  render?: (props: ToolbarRenderProps, toolbarItems: ToolbarItemProps[], dom: any[], containerDom: (innerContent: React.ReactNode) => React.ReactNode) => React.ReactNode;
-  tooltipSide?: 'top' | 'bottom';
+  render?: (props: ToolbarRenderProps, toolbarItems: ToolbarItemProps[], dom: any[], containerDom: (innerContent: React.ReactNode) => React.ReactNode) => React.ReactNode
 }
 
 export interface NameValueOption<T = string> {
   name: string
   value: T
 }
+
+export type VideoAlignment = 'flex-start' | 'center' | 'flex-end';
 
 export type PaperSize = 'Legal' | 'Letter' | 'Tabloid' | 'A0' | 'A1' | 'A2' | 'A3' | 'A4' | 'A5';
 

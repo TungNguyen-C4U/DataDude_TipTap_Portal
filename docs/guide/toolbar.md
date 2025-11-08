@@ -32,15 +32,6 @@ Bold.configure({
 />
 ```
 
-## Tooltips
-
-The tooltips of the extension buttons registered to the toolbar can be customized with
-
-### tooltipOptions 
-
-Type: `TooltipContentProps`\
-Default: `{}`
-
 ## ToolbarProps
 
 ```ts
@@ -60,6 +51,5 @@ export interface ToolbarRenderProps {
 }
 export interface ToolbarProps {
   render?: (props: ToolbarRenderProps, toolbarItems: ToolbarItemProps[], dom: JSX.Element[], containerDom: (innerContent: React.ReactNode) => React.ReactNode) => React.ReactNode
-  tooltipSide?: 'top' | 'bottom';
 }
 ```

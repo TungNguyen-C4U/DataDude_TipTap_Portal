@@ -23,12 +23,3 @@ const extensions = [
   TextUnderline // [!code ++]
 ];
 ```
-
-## Options
-
-### shortcutKeys
-
-Type: `string[]`\
-Default: `['mod', 'U']`
-
-Keyboard shortcuts for the extension.

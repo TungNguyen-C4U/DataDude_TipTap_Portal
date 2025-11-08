@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { mergeAttributes } from '@tiptap/core';
 import TiptapImage from '@tiptap/extension-image';
-import { Plugin, PluginKey } from '@tiptap/pm/state';
+import { Plugin } from '@tiptap/pm/state';
 import { ReactNodeViewRenderer } from '@tiptap/react';
 
 import ActionImageButton from '@/extensions/Image/components/ActionImageButton';
@@ -30,10 +30,8 @@ export interface SetImageAttrsOptions {
 const DEFAULT_OPTIONS: any = {
   acceptMimes: ['image/jpeg', 'image/gif', 'image/png', 'image/jpg'],
   maxSize: 1024 * 1024 * 5, // 5MB
-  multiple: true,
   resourceImage: 'both',
   defaultInline: false,
-  enableAlt: true,
 };
 
 declare module '@tiptap/core' {
@@ -61,23 +59,12 @@ export interface IImageOptions extends GeneralOptions<IImageOptions> {
 
   HTMLAttributes?: any
 
-  multiple?: boolean
   acceptMimes?: string[]
   maxSize?: number
 
   /** The source URL of the image */
   resourceImage: 'upload' | 'link' | 'both'
-  defaultInline?: boolean,
-
-  // Enable alternative text input
-  enableAlt?: boolean
-
-  /** Function to handle errors during file validation */
-  onError?: (error: {
-    type: 'size' | 'type' | 'upload';
-    message: string;
-    file?: File;
-  }) => void;
+  defaultInline?: boolean
 }
 
 export const Image = /* @__PURE__ */ TiptapImage.extend<IImageOptions>({
@@ -155,15 +142,6 @@ export const Image = /* @__PURE__ */ TiptapImage.extend<IImageOptions>({
           };
         },
       },
-      alt: {
-        default: '',
-        parseHTML: element => element.getAttribute('alt'),
-        renderHTML: (attributes) => {
-          return {
-            alt: attributes.alt,
-          };
-        },
-      }
     };
   },
 
@@ -205,7 +183,7 @@ export const Image = /* @__PURE__ */ TiptapImage.extend<IImageOptions>({
 
     const floatStyle = inlineFloat ? `float: ${align};` : '';
 
-    const marginStyle
+    const marginStyle 
       = inlineFloat ? (align === 'left' ? 'margin: 1em 1em 1em 0;' : 'margin: 1em 0 1em 1em;') : '';
 
     const style = `${floatStyle}${marginStyle}${transformStyle}`;
@@ -274,9 +252,6 @@ export const Image = /* @__PURE__ */ TiptapImage.extend<IImageOptions>({
           };
         },
       },
-      {
-        tag: 'img[src]:not([src^="data:"])',
-      },
     ];
   },
   addProseMirrorPlugins() {
@@ -307,39 +282,28 @@ export const Image = /* @__PURE__ */ TiptapImage.extend<IImageOptions>({
     });
 
     return [
-      UploadImagesPlugin(),
-
       new Plugin({
-        key: new PluginKey('image'),
         props: {
           handlePaste: (view, event) => {
-            const hasFiles =
-                event.clipboardData &&
-                event.clipboardData.files &&
-                event.clipboardData.files?.length;
-
-            if (!hasFiles) {
-              return;
+            if (!event.clipboardData) {
+              return false;
             }
-
             const items = [...(event.clipboardData.files || [])];
-
             if (items.some(x => x.type === 'text/html')) {
               return false;
             }
-
             return handleImagePaste(view, event, uploadFn);
           },
           handleDrop: (view, event, _, moved) => {
             if (!(event instanceof DragEvent) || !event.dataTransfer) {
               return false;
             }
-
             handleImageDrop(view, event, moved, uploadFn);
             return false;
           },
         },
       }),
+      UploadImagesPlugin(),
     ];
   },
 });

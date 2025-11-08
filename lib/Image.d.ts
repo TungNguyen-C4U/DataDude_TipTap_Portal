@@ -67,27 +67,17 @@ declare interface GeneralOptions<T> {
     button: ButtonView<T>;
     /** Show on Toolbar */
     toolbar?: boolean;
-    /** Shortcut keys override */
-    shortcutKeys?: string[] | string[][];
 }
 
 export declare interface IImageOptions extends GeneralOptions<IImageOptions> {
     /** Function for uploading files */
     upload?: (file: File) => Promise<string>;
     HTMLAttributes?: any;
-    multiple?: boolean;
     acceptMimes?: string[];
     maxSize?: number;
     /** The source URL of the image */
     resourceImage: 'upload' | 'link' | 'both';
     defaultInline?: boolean;
-    enableAlt?: boolean;
-    /** Function to handle errors during file validation */
-    onError?: (error: {
-        type: 'size' | 'type' | 'upload';
-        message: string;
-        file?: File;
-    }) => void;
 }
 
 declare const Image_2: Node_2<IImageOptions, any>;
@@ -126,18 +116,6 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        codeView: {
-            /**
-                   * Toggle code view mode
-                   */
-            toggleCodeView: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
         setCodeBlock: {
             setCodeBlock: (options?: any) => ReturnType;
         };
@@ -147,11 +125,11 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        emoji: {
-            setEmoji: (emoji: {
-                name: string;
-                emoji: string;
-            }) => ReturnType;
+        codeView: {
+            /**
+                   * Toggle code view mode
+                   */
+            toggleCodeView: () => ReturnType;
         };
     }
 }
@@ -169,8 +147,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        exportPdf: {
-            exportToPdf: () => ReturnType;
+        excalidraw: {
+            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
         };
     }
 }
@@ -178,8 +156,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        excalidraw: {
-            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
+        exportWord: {
+            exportToWord: () => ReturnType;
         };
     }
 }
@@ -205,8 +183,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        exportWord: {
-            exportToWord: () => ReturnType;
+        painter: {
+            setPainter: (marks: Mark[]) => ReturnType;
         };
     }
 }
@@ -214,8 +192,11 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        painter: {
-            setPainter: (marks: Mark[]) => ReturnType;
+        emoji: {
+            setEmoji: (emoji: {
+                name: string;
+                emoji: string;
+            }) => ReturnType;
         };
     }
 }
@@ -294,9 +275,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        lineHeight: {
-            setLineHeight: (lineHeight: string) => ReturnType;
-            unsetLineHeight: () => ReturnType;
+        katex: {
+            setKatex: (arg?: IKatexAttrs) => ReturnType;
         };
     }
 }
@@ -304,8 +284,9 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        katex: {
-            setKatex: (arg?: IKatexAttrs) => ReturnType;
+        lineHeight: {
+            setLineHeight: (lineHeight: string) => ReturnType;
+            unsetLineHeight: () => ReturnType;
         };
     }
 }
@@ -370,6 +351,22 @@ declare module '@tiptap/core' {
              */
             setTweet: (options: SetTweetOptions) => ReturnType;
             updateTweet: (options: SetTweetOptions) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        video: {
+            /**
+             * Add an video
+             */
+            setVideo: (options: Partial<SetVideoOptions>) => ReturnType;
+            /**
+             * Update an video
+             */
+            updateVideo: (options: Partial<SetVideoOptions>) => ReturnType;
         };
     }
 }

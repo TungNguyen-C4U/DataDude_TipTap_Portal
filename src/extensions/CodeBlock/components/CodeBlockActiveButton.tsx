@@ -4,8 +4,6 @@ import {
   ActionButton,
 } from '@/components';
 
-import type { TooltipContentProps } from '@radix-ui/react-tooltip';
-
 interface Props {
   editor: any
   disabled?: boolean
@@ -13,7 +11,6 @@ interface Props {
   shortcutKeys?: string[]
   maxHeight?: string | number
   tooltip?: string
-  tooltipOptions?: TooltipContentProps
   action: (language: string) => void
   icon?: any
 }
@@ -26,7 +23,6 @@ function CodeBlockActiveButton({ action, ...props }: Props) {
       disabled={props?.disabled}
       icon={props?.icon}
       tooltip={props?.tooltip}
-      tooltipOptions={props?.tooltipOptions}
     />
   );
 }

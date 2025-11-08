@@ -144,6 +144,18 @@ export declare interface BaseKitOptions {
 
 export { BubbleMenu }
 
+declare interface BubbleMenuConfig {
+    /**
+     * @description Column menu hidden
+     * @default false
+     */
+    hidden?: boolean;
+    /**
+     * custom menu actions
+     */
+    actions?: ActionButtonProps[];
+}
+
 /**
  * Represents the BubbleMenuProps.
  */
@@ -155,7 +167,7 @@ declare interface BubbleMenuProps {
          */
         hidden?: boolean;
     };
-    tableConfig?: TableMenuConfig;
+    tableConfig?: BubbleMenuConfig;
     floatingMenuConfig?: {
         /**
          * @description Floating menu hidden
@@ -325,8 +337,6 @@ declare interface GeneralOptions<T> {
     button: ButtonView<T>;
     /** Show on Toolbar */
     toolbar?: boolean;
-    /** Shortcut keys override */
-    shortcutKeys?: string[] | string[][];
 }
 
 /**
@@ -338,7 +348,7 @@ declare interface RichTextEditorProps {
     /** Extensions for the editor */
     extensions: AnyExtension[];
     /** Output format */
-    output: 'html' | 'json' | 'text';
+    output: "html" | "json" | "text";
     /** Model value */
     modelValue?: string | object;
     /** Dark mode flag */
@@ -379,22 +389,6 @@ declare interface RichTextEditorProps {
     immediatelyRender?: boolean;
 }
 
-declare interface TableMenuConfig {
-    /**
-     * @description Column menu hidden
-     * @default false
-     */
-    hidden?: boolean;
-    /**
-     * custom menu actions
-     */
-    actions?: ActionButtonProps[];
-    /**
-     * hidden default actions, if any
-     */
-    hiddenActions?: string[];
-}
-
 declare interface TextBubbleOptions extends GeneralOptions<TextBubbleOptions> {
 }
 
@@ -414,7 +408,6 @@ declare interface ToolbarItemProps {
 
 declare interface ToolbarProps {
     render?: (props: ToolbarRenderProps, toolbarItems: ToolbarItemProps[], dom: any[], containerDom: (innerContent: React.ReactNode) => React.ReactNode) => React.ReactNode;
-    tooltipSide?: 'top' | 'bottom';
 }
 
 declare interface ToolbarRenderProps {
@@ -458,18 +451,6 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        codeView: {
-            /**
-                   * Toggle code view mode
-                   */
-            toggleCodeView: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
         setCodeBlock: {
             setCodeBlock: (options?: any) => ReturnType;
         };
@@ -479,11 +460,11 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        emoji: {
-            setEmoji: (emoji: {
-                name: string;
-                emoji: string;
-            }) => ReturnType;
+        codeView: {
+            /**
+                   * Toggle code view mode
+                   */
+            toggleCodeView: () => ReturnType;
         };
     }
 }
@@ -501,8 +482,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        exportPdf: {
-            exportToPdf: () => ReturnType;
+        excalidraw: {
+            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
         };
     }
 }
@@ -510,8 +491,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        excalidraw: {
-            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
+        exportWord: {
+            exportToWord: () => ReturnType;
         };
     }
 }
@@ -537,8 +518,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        exportWord: {
-            exportToWord: () => ReturnType;
+        painter: {
+            setPainter: (marks: Mark[]) => ReturnType;
         };
     }
 }
@@ -546,8 +527,11 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        painter: {
-            setPainter: (marks: Mark[]) => ReturnType;
+        emoji: {
+            setEmoji: (emoji: {
+                name: string;
+                emoji: string;
+            }) => ReturnType;
         };
     }
 }
@@ -626,9 +610,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        lineHeight: {
-            setLineHeight: (lineHeight: string) => ReturnType;
-            unsetLineHeight: () => ReturnType;
+        katex: {
+            setKatex: (arg?: IKatexAttrs) => ReturnType;
         };
     }
 }
@@ -636,8 +619,9 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        katex: {
-            setKatex: (arg?: IKatexAttrs) => ReturnType;
+        lineHeight: {
+            setLineHeight: (lineHeight: string) => ReturnType;
+            unsetLineHeight: () => ReturnType;
         };
     }
 }
@@ -702,6 +686,22 @@ declare module '@tiptap/core' {
              */
             setTweet: (options: SetTweetOptions) => ReturnType;
             updateTweet: (options: SetTweetOptions) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        video: {
+            /**
+             * Add an video
+             */
+            setVideo: (options: Partial<SetVideoOptions>) => ReturnType;
+            /**
+             * Update an video
+             */
+            updateVideo: (options: Partial<SetVideoOptions>) => ReturnType;
         };
     }
 }

@@ -31,10 +31,8 @@ export const Link = /* @__PURE__ */ TiptapLink.extend<LinkOptions>({
   },
 
   addOptions() {
-    const parentOptions = this.parent?.() || {};
-    const presetTarget = parentOptions.HTMLAttributes?.target;
     return {
-      ...parentOptions,
+      ...this.parent?.(),
       openOnClick: true,
       button: ({ editor, t }) => {
         return {
@@ -44,22 +42,14 @@ export const Link = /* @__PURE__ */ TiptapLink.extend<LinkOptions>({
             action: (value) => {
               const { link, text, openInNewTab } = value;
 
-              if(!link) {
-                // if user clears the link and applies, remove the link
-                editor.chain().extendMarkRange('link').unsetLink().run();
-                return;
-              }
-
-              // if cursor is inside a link, select the entire link first
-              if (editor.isActive('link')) {
-                editor.chain().extendMarkRange('link').run();
-              }
-
-              const { from } = editor.state.selection;
+              const { state } = editor;
+              const { from } = state.selection;
               const insertedLength = text.length;
+              const to = from + insertedLength;
 
               editor
                 .chain()
+                .extendMarkRange('link')
                 .insertContent({
                   type: 'text',
                   text,
@@ -67,14 +57,14 @@ export const Link = /* @__PURE__ */ TiptapLink.extend<LinkOptions>({
                     {
                       type: 'link',
                       attrs: {
-                        href: link.match(/^https?:\/\//i) ? link : `http://${link}`,
-                        target: presetTarget ?? (openInNewTab ? '_blank' : ''),
+                        href: link,
+                        target: openInNewTab ? '_blank' : '',
                       },
                     },
                   ],
                 })
                 .setLink({ href: link })
-                .setTextSelection({ from, to: from + insertedLength })
+                .setTextSelection({ from, to }) // 👈 Select inserted text
                 .focus()
                 .run();
             },
@@ -83,7 +73,6 @@ export const Link = /* @__PURE__ */ TiptapLink.extend<LinkOptions>({
             disabled: !editor.can().setLink({ href: '' }),
             icon: 'Link',
             tooltip: t('editor.link.tooltip'),
-            target: presetTarget,
           },
         };
       },
@@ -100,18 +89,6 @@ export const Link = /* @__PURE__ */ TiptapLink.extend<LinkOptions>({
             if (!range) {
               return false;
             }
-
-            // honor openOnClick setting
-            let mark: any = null;
-            doc.nodesBetween(range.from, range.to, (node) => {
-              mark = node.marks.find((m) => m.type === schema.marks.link);
-              return !mark;
-            });
-            if (this.options.openOnClick && mark?.attrs.href && pos !== range.to) {
-              window.open(mark.attrs.href, mark.attrs.target || '_self');
-              return true;
-            }
-
             const $start = doc.resolve(range.from);
             const $end = doc.resolve(range.to);
             const transaction = tr.setSelection(

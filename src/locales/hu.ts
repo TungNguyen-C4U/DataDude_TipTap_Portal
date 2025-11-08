@@ -116,8 +116,6 @@ const locale = {
   'editor.fullscreen.tooltip.exit': 'Kilépés teljes képernyős módból',
   'editor.imageUpload.cancel': 'Mégsem',
   'editor.imageUpload.crop': 'Körbevágás',
-  'editor.imageUpload.uploading': 'Feltöltés...',
-  'editor.imageUpload.alt': 'Alternatív szöveg',
   'editor.imageUpload.fileTypeNotSupported': 'Fájltípus nem támogatott',
   'editor.imageUpload.fileSizeTooBig': 'A fájlméret túl nagy, a maximum méret',
   'editor.table.menu.insertColumnBefore': 'Oszlop beszúrása balra',
@@ -171,9 +169,6 @@ const locale = {
   'editor.codeView.tooltip': 'Kódnézet',
   'editor.tooltip.flipX': 'Vízszintes tükrözés',
   'editor.tooltip.flipY': 'Függőleges tükrözés',
-  'editor.upload.fileTypeNotSupported': '{fileName} fájltípus nem támogatott',
-  'editor.upload.fileSizeTooBig': '{fileName} fájlméret túl nagy, maximális méret {size}MB',
-  'editor.upload.error': 'Hiba a fájl feltöltésekor',
 };
 
 export default locale;

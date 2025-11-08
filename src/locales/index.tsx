@@ -1,28 +1,20 @@
 import { useEffect, useMemo } from 'react';
-
 import { createSignal, useSignal } from 'reactjs-signal';
 
-import { DEFAULT_LANG_VALUE } from '@/constants';
-import mitt from '@/utils/mitt';
-import type { EventType } from '@/utils/mitt';
-
 import en from './en';
-import hu_HU from './hu';
 import pt_BR from './pt-br';
 import vi from './vi';
 import zh_CN from './zh-cn';
-import fi from './fi';
+import hu_HU from './hu';
+import mitt from '@/utils/mitt';
+import type { EventType } from '@/utils/mitt';
+import { DEFAULT_LANG_VALUE } from '@/constants';
 
 // Define supported language types
-type LanguageType = 'en' | 'hu_HU' | 'vi' | 'zh_CN' | 'pt_BR' | 'fi' | (string & {});
+type LanguageType = 'en' | 'hu_HU' | 'vi' | 'zh_CN' | 'pt_BR' | (string & {});
 
 // Define message key types based on the 'en' locale
 type MessageKeysType = keyof typeof en;
-
-interface LocaleInterface {
-  lang: LanguageType
-  message: Record<LanguageType, Record<MessageKeysType, string>>
-}
 
 // Interface for locale configuration
 interface LocaleInterface {
@@ -44,7 +36,6 @@ export const DEFAULT_LOCALE: LocaleInterface = {
     vi,
     zh_CN,
     pt_BR,
-    fi,
   },
 };
 
@@ -122,16 +113,8 @@ class Locale {
 
     const message = this.loadLangMessage(lang);
 
-    return function t(path: MessageKeysType, params?: Record<string, string | number>) {
-      let template = message[path] || path;
-
-      if (params) {
-        Object.entries(params).forEach(([key, value]) => {
-          template = template.replace(new RegExp(`\\{${key}\\}`, 'g'), String(value));
-        });
-      }
-
-      return template;
+    return function t(path: MessageKeysType) {
+      return message[path] || path;
     };
   }
 }
@@ -165,12 +148,10 @@ function useLocale() {
 }
 
 const localeActions = {
-  t: (path: MessageKeysType, params?: Record<string, string | number>) => {
-    return locale.buildLocalesHandler(atomLang())(path, params);
+  t: (path: MessageKeysType) => {
+    return locale.buildLocalesHandler(atomLang())(path);
   },
 };
-
-export type TranslationFunction = (path: MessageKeysType, params?: Record<string, string | number>) => string;
 
 export default locale;
 export { Locale, localeActions, useLocale };
@@ -180,4 +161,3 @@ export { default as pt_BR } from './pt-br';
 export { default as vi } from './vi';
 export { default as zh_CN } from './zh-cn';
 export { default as hu_HU } from './hu';
-export { default as fi } from './fi';

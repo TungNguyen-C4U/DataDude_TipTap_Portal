@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { useCallback, useEffect, useState, useMemo } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import type { Editor } from '@tiptap/core';
 
@@ -9,19 +9,12 @@ import { ActionButton } from '@/components/ActionButton';
 import { Button } from '@/components/ui';
 import { Dialog, DialogContent, DialogFooter, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { OPEN_EXCALIDRAW_SETTING_MODAL, cancelSubject, subject } from '@/utils/_event';
-import type { TooltipContentProps } from '@radix-ui/react-tooltip';
 
 interface IProps {
-  editor: Editor, tooltipOptions?: TooltipContentProps
+  editor: Editor
 }
 
-export const ExcalidrawActiveButton: React.FC<IProps> = ({ editor, tooltipOptions }) => {
-  const excalidrawOptions = useMemo(() => {
-    return editor.extensionManager.extensions.find(
-      (ext: any) => ext.name === 'excalidraw'
-    )?.options || {};
-  }, [editor]);
-
+export const ExcalidrawActiveButton: React.FC<IProps> = ({ editor }) => {
   const [Excalidraw, setExcalidraw] = useState<any>(null);
   const [data, setData] = useState({});
   const [initialData, setInitialData] = useState({ elements: [], appState: { isLoading: false }, files: null });
@@ -108,7 +101,6 @@ export const ExcalidrawActiveButton: React.FC<IProps> = ({ editor, tooltipOption
           action={() => toggleVisible(true)}
           icon="Excalidraw"
           tooltip="Excalidraw"
-          tooltipOptions={tooltipOptions}
         />
       </DialogTrigger>
 
@@ -137,7 +129,6 @@ export const ExcalidrawActiveButton: React.FC<IProps> = ({ editor, tooltipOption
                   langCode="en"
                   onChange={onChange}
                   ref={renderExcalidraw}
-                  {...excalidrawOptions.excalidrawProps}
                 />
               )
               : null}

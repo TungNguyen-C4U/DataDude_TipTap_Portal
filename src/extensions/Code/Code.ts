@@ -10,14 +10,14 @@ export const Code = /* @__PURE__ */ TiptapCode.extend<CodeOptions>({
   addOptions() {
     return {
       ...this.parent?.(),
-      button: ({ editor, t, extension }) => ({
+      button: ({ editor, t }) => ({
         component: ActionButton,
         componentProps: {
           action: () => editor.commands.toggleCode(),
           isActive: () => editor.isActive('code') || false,
           disabled: !editor.can().toggleCode(),
           icon: 'Code',
-          shortcutKeys: extension.options.shortcutKeys ?? ['mod', 'E'],
+          shortcutKeys: ['mod', 'E'],
           tooltip: t('editor.code.tooltip'),
         },
       }),

@@ -14,10 +14,10 @@
     ]
   },
   {
-    "name": "Bold.ts",
-    "package": "Bold",
+    "name": "Blockquote.ts",
+    "package": "Blockquote",
     "alias": [
-      "Bold"
+      "Blockquote"
     ]
   },
   {
@@ -28,24 +28,10 @@
     ]
   },
   {
-    "name": "Clear.ts",
-    "package": "Clear",
+    "name": "Bold.ts",
+    "package": "Bold",
     "alias": [
-      "Clear"
-    ]
-  },
-  {
-    "name": "Blockquote.ts",
-    "package": "Blockquote",
-    "alias": [
-      "Blockquote"
-    ]
-  },
-  {
-    "name": "CodeBlock.ts",
-    "package": "CodeBlock",
-    "alias": [
-      "CodeBlock"
+      "Bold"
     ]
   },
   {
@@ -53,6 +39,20 @@
     "package": "Code",
     "alias": [
       "Code"
+    ]
+  },
+  {
+    "name": "Clear.ts",
+    "package": "Clear",
+    "alias": [
+      "Clear"
+    ]
+  },
+  {
+    "name": "CodeBlock.ts",
+    "package": "CodeBlock",
+    "alias": [
+      "CodeBlock"
     ]
   },
   {
@@ -70,17 +70,17 @@
     ]
   },
   {
-    "name": "Drawer.ts",
-    "package": "Drawer",
-    "alias": [
-      "Drawer"
-    ]
-  },
-  {
     "name": "Document.ts",
     "package": "Document",
     "alias": [
       "Document"
+    ]
+  },
+  {
+    "name": "Drawer.ts",
+    "package": "Drawer",
+    "alias": [
+      "Drawer"
     ]
   },
   {
@@ -203,17 +203,17 @@
     ]
   },
   {
-    "name": "Indent.ts",
-    "package": "Indent",
-    "alias": [
-      "Indent"
-    ]
-  },
-  {
     "name": "Italic.ts",
     "package": "Italic",
     "alias": [
       "Italic"
+    ]
+  },
+  {
+    "name": "Indent.ts",
+    "package": "Indent",
+    "alias": [
+      "Indent"
     ]
   },
   {
@@ -266,6 +266,13 @@
     ]
   },
   {
+    "name": "OrderedList.ts",
+    "package": "OrderedList",
+    "alias": [
+      "OrderedList"
+    ]
+  },
+  {
     "name": "MultiColumn.ts",
     "package": "MultiColumn",
     "alias": [
@@ -277,13 +284,6 @@
     "package": "MultiColumn",
     "alias": [
       "MultiColumn"
-    ]
-  },
-  {
-    "name": "OrderedList.ts",
-    "package": "OrderedList",
-    "alias": [
-      "OrderedList"
     ]
   },
   {
@@ -371,6 +371,13 @@
     ]
   },
   {
+    "name": "TextBubble.ts",
+    "package": "TextBubble",
+    "alias": [
+      "TextBubble"
+    ]
+  },
+  {
     "name": "TextDirection.ts",
     "package": "TextDirection",
     "alias": [
@@ -382,13 +389,6 @@
     "package": "TextUnderline",
     "alias": [
       "TextUnderline"
-    ]
-  },
-  {
-    "name": "TextBubble.ts",
-    "package": "TextBubble",
-    "alias": [
-      "TextBubble"
     ]
   },
   {

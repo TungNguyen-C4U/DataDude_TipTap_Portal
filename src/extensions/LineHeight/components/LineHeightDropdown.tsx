@@ -11,13 +11,10 @@ import {
 import { useLocale } from '@/locales';
 import type { ButtonViewReturnComponentProps } from '@/types';
 
-import type { TooltipContentProps } from '@radix-ui/react-tooltip';
-
 interface IPropsLineHeightDropdown {
   editor: any
   icon?: any
   tooltip?: string
-  tooltipOptions?: TooltipContentProps
   disabled?: boolean
   action?: ButtonViewReturnComponentProps['action']
   isActive?: ButtonViewReturnComponentProps['isActive']
@@ -69,7 +66,6 @@ function LineHeightDropdown(props: IPropsLineHeightDropdown) {
           disabled={props?.disabled}
           icon="LineHeight"
           tooltip={props?.tooltip}
-          tooltipOptions={props?.tooltipOptions}
         >
           <IconComponent className="richtext-ml-1 richtext-size-3 richtext-text-zinc-500"
             name="MenuDown"

@@ -5,9 +5,7 @@ import { HorizontalRule as TiptapHorizontalRule } from '@tiptap/extension-horizo
 import { ActionButton } from '@/components';
 import type { GeneralOptions } from '@/types';
 
-export interface HorizontalRuleOptions
-  extends TiptapHorizontalRuleOptions,
-  GeneralOptions<HorizontalRuleOptions> {}
+export interface HorizontalRuleOptions extends TiptapHorizontalRuleOptions, GeneralOptions<HorizontalRuleOptions> {}
 
 export const HorizontalRule = /* @__PURE__ */ TiptapHorizontalRule.extend<HorizontalRuleOptions>({
   renderHTML() {
@@ -16,19 +14,28 @@ export const HorizontalRule = /* @__PURE__ */ TiptapHorizontalRule.extend<Horizo
       mergeAttributes(this.options.HTMLAttributes, {
         'data-type': this.name,
       }),
-      ['hr'],
+      [
+        'div',
+        {
+          class: 'richtext-flex richtext-justify-center richtext-items-center',
+          style: 'gap: 10px;',
+        },
+        ['span', { class: 'richtext-w-2 richtext-h-2 richtext-bg-gray-300 richtext-rounded-full' }],
+        ['span', { class: 'richtext-w-2 richtext-h-2 richtext-bg-gray-300 richtext-rounded-full' }],
+        ['span', { class: 'richtext-w-2 richtext-h-2 richtext-bg-gray-300 richtext-rounded-full' }],
+      ],
     ];
   },
   addOptions() {
     return {
       ...this.parent?.(),
-      button: ({ editor, t, extension }) => ({
+      button: ({ editor, t }) => ({
         component: ActionButton,
         componentProps: {
           action: () => editor.commands.setHorizontalRule(),
           disabled: !editor.can().setHorizontalRule(),
           icon: 'Minus',
-          shortcutKeys: extension.options.shortcutKeys ?? ['mod', 'alt', 'S'],
+          shortcutKeys: ['mod', 'alt', 'S'],
           tooltip: t('editor.horizontalrule.tooltip'),
         },
       }),

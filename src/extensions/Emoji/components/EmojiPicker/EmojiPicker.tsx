@@ -1,5 +1,5 @@
 import type React from 'react';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 
 import { ActionButton, Popover, PopoverContent, PopoverTrigger } from '@/components';
 import { EmojiPicker, EmojiPickerContent, EmojiPickerFooter, EmojiPickerSearch } from '@/components/ui/emoji-picker';
@@ -11,20 +11,21 @@ interface IProps {
 }
 
 function EmojiPickerWrap({ onSelectEmoji, children }: IProps) {
-  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Popover onOpenChange={setIsOpen}
-      open={isOpen}
-    >
+    <Popover modal>
       <PopoverTrigger asChild>
         {children}
       </PopoverTrigger>
 
-      <PopoverContent className="!richtext-w-fit !richtext-p-0">
+      <PopoverContent align="start"
+        className="richtext-size-full richtext-p-2"
+        hideWhenDetached
+        side="bottom"
+      >
         <EmojiPicker
           className="!richtext-h-[342px]"
           onEmojiSelect={({ emoji }) => {
-            setIsOpen(false);
             onSelectEmoji(emoji);
           }}
         >
@@ -52,7 +53,6 @@ export function EmojiPickerComponent({ editor, icon, ...props }: any) {
       <ActionButton
         icon={icon}
         tooltip={props?.tooltip}
-        tooltipOptions={props?.tooltipOptions}
       />
     </EmojiPickerWrap>
   );

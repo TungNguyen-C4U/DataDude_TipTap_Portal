@@ -4,7 +4,6 @@ import { NodeViewWrapper } from '@tiptap/react';
 import clsx from 'clsx';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { IconComponent } from '@/components';
 
 import 'prism-code-editor-lightweight/prism/languages/bash';
 import 'prism-code-editor-lightweight/prism/languages/css';
@@ -93,34 +92,16 @@ export function NodeViewCodeBlock(props: any) {
   const codeEditor = useRef<PrismEditor | null>(null);
   const code = props.node.attrs.code || props.node.textContent || '';
 
-  const focusEditor = useCallback((e?: React.MouseEvent) => {
-    e?.stopPropagation();
-    setTimeout(() => {
-      codeEditor.current?.textarea?.focus?.();
-    }, 0);
-  }, []);
-
-  const copyCode = async () => {
-    if (!code) return;
-
-    try {
-      if (navigator.clipboard) {
-        await navigator.clipboard.writeText(code);
-        console.log('Copy Success');
-      } else {
-        const textarea = document.createElement('textarea');
-        textarea.value = code;
-        document.body.appendChild(textarea);
-        textarea.select();
-        // TODO execCommand is deprecated. Clipboard-polyfill can be used to solve compatibility issues
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        console.log('Copy Success (fallback)');
-      }
-    } catch (err) {
-      console.error('Error:', err);
-    } finally {
-      focusEditor();
+  const copyCode = () => {
+    if (code) {
+      navigator.clipboard
+        .writeText(code)
+        .then(() => {
+          console.log('Copy Success');
+        })
+        .catch((err) => {
+          console.error('Error:', err);
+        });
     }
   };
 
@@ -128,20 +109,18 @@ export function NodeViewCodeBlock(props: any) {
     props.updateAttributes({
       lineNumbers: !props.node.attrs.lineNumbers,
     });
-    focusEditor();
   };
 
   const toggleWordWrap = () => {
     props.updateAttributes({
       wordWrap: !props.node.attrs.wordWrap,
     });
-    focusEditor();
   };
 
   const validateAndUpdateLanguage = (attrs: any) => {
     const validatedAttrs = { ...attrs };
 
-    if (validatedAttrs.language && !languages.some(lang => lang.value === validatedAttrs.language)) {
+    if (validatedAttrs.language && !languages.some((lang) => lang.value === validatedAttrs.language)) {
       validatedAttrs.language = 'plaintext';
       props.updateAttributes({
         language: 'plaintext',
@@ -149,10 +128,6 @@ export function NodeViewCodeBlock(props: any) {
     }
     return validatedAttrs;
   };
-
-  const handleContainerClick = useCallback((e: React.MouseEvent) => {
-    focusEditor(e);
-  }, [focusEditor]);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -166,9 +141,7 @@ export function NodeViewCodeBlock(props: any) {
         value: code,
         rtl: false,
         onUpdate(value) {
-          queueMicrotask(() => {
-            props.updateAttributes({ code: value });
-          });
+          props.updateAttributes({ code: value });
         },
       });
       codeEditor.current.addExtensions(
@@ -183,7 +156,7 @@ export function NodeViewCodeBlock(props: any) {
 
       if (props.node.attrs.shouldFocus) {
         setTimeout(() => {
-          focusEditor();
+          codeEditor.current?.textarea.focus();
           props.updateAttributes({
             shouldFocus: false,
           });
@@ -207,14 +180,14 @@ export function NodeViewCodeBlock(props: any) {
   return (
     <NodeViewWrapper className={clsx(styles.wrap, 'render-wrapper')}>
       <div
-        onClick={handleContainerClick}
         ref={containerRef}
-        className={clsx('richtext-node-container richtext-hover-shadow richtext-select-outline richtext-node-code-block !richtext-my-[10px]', {
-          [styles.blockInfoEditable]: !isEditable,
-        })}
-      >
+        className={clsx(
+          'richtext-node-container richtext-hover-shadow richtext-select-outline richtext-node-code-block',
+          {
+            [styles.blockInfoEditable]: !isEditable,
+          }
+        )}>
         <div className="richtext-code-block-toolbar">
-
           <div>
             <Select
               defaultValue={props.node.attrs.language}
@@ -223,47 +196,34 @@ export function NodeViewCodeBlock(props: any) {
                 props.updateAttributes({
                   language: value,
                 });
-                focusEditor();
-              }}
-            >
+              }}>
               <SelectTrigger className="richtext-h-7 richtext-w-[160px] richtext-border-none richtext-text-sm richtext-outline-none hover:richtext-bg-[#5a5d5e4f]">
                 <SelectValue placeholder="Select language" />
               </SelectTrigger>
 
               <SelectContent
                 className="richtext-border-[#3a3f4b] richtext-bg-[#21252b] richtext-text-[#ccc]"
-                onCloseAutoFocus={(e) => e.preventDefault()}
-              >
-                {
-                  languages?.map((lang) => {
-                    return (
-                      <SelectItem
-                        key={lang.value}
-                        value={lang.value}
-                      >
-                        {lang.label}
-                      </SelectItem>
-                    );
-                  }
-                  )
-                }
+                onCloseAutoFocus={(e) => e.preventDefault()}>
+                {languages?.map((lang) => {
+                  return (
+                    <SelectItem key={lang.value} value={lang.value}>
+                      {lang.label}
+                    </SelectItem>
+                  );
+                })}
               </SelectContent>
             </Select>
           </div>
-
+          {/* 
           <div className="toolbar-divider"></div>
 
           <div
             className="richtext-flex richtext-size-7 richtext-cursor-pointer richtext-items-center richtext-justify-center richtext-rounded-sm hover:richtext-bg-[#5a5d5e4f]"
-            onClick={copyCode}
-          >
-            <IconComponent className="richtext-size-4"
-              name="Copy"
-            >
-            </IconComponent>
-          </div>
+            onClick={copyCode}>
+            <IconComponent className="richtext-size-4" name="Copy"></IconComponent>
+          </div> */}
 
-          <div className="toolbar-divider"></div>
+          {/* <div className="toolbar-divider"></div>
 
           <div
             onClick={toggleLineNumbers}
@@ -301,7 +261,6 @@ export function NodeViewCodeBlock(props: any) {
                 props.updateAttributes({
                   tabSize: value,
                 });
-                focusEditor();
               }}
             >
               <SelectTrigger className="richtext-h-7 richtext-w-[60px] richtext-border-none richtext-text-sm richtext-outline-none hover:richtext-bg-[#5a5d5e4f]">
@@ -340,7 +299,7 @@ export function NodeViewCodeBlock(props: any) {
               name="Trash2"
             >
             </IconComponent>
-          </div>
+          </div> */}
         </div>
       </div>
     </NodeViewWrapper>
