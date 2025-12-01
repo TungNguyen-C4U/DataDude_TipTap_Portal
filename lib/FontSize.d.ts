@@ -105,18 +105,6 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        codeView: {
-            /**
-                   * Toggle code view mode
-                   */
-            toggleCodeView: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
         setCodeBlock: {
             setCodeBlock: (options?: any) => ReturnType;
         };
@@ -126,11 +114,11 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        emoji: {
-            setEmoji: (emoji: {
-                name: string;
-                emoji: string;
-            }) => ReturnType;
+        codeView: {
+            /**
+                   * Toggle code view mode
+                   */
+            toggleCodeView: () => ReturnType;
         };
     }
 }
@@ -166,8 +154,11 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        painter: {
-            setPainter: (marks: Mark[]) => ReturnType;
+        emoji: {
+            setEmoji: (emoji: {
+                name: string;
+                emoji: string;
+            }) => ReturnType;
         };
     }
 }
@@ -193,6 +184,35 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
+        painter: {
+            setPainter: (marks: Mark[]) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        imageUpload: {
+            /**
+             * Add an image
+             */
+            setImageInline: (options: Partial<SetImageAttrsOptions>) => ReturnType;
+            /**
+             * Update an image
+             */
+            updateImage: (options: Partial<SetImageAttrsOptions>) => ReturnType;
+            /**
+             * Set image alignment
+             */
+            setAlignImage: (align: 'left' | 'center' | 'right') => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
         iframe: {
             /**
              * Add an iframe
@@ -201,6 +221,22 @@ declare module '@tiptap/core' {
                 src: string;
                 service: string;
             }) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        indent: {
+            /**
+             * Set the indent attribute
+             */
+            indent: () => ReturnType;
+            /**
+             * Set the outdent attribute
+             */
+            outdent: () => ReturnType;
         };
     }
 }
@@ -247,35 +283,9 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        imageUpload: {
-            /**
-             * Add an image
-             */
-            setImageInline: (options: Partial<SetImageAttrsOptions>) => ReturnType;
-            /**
-             * Update an image
-             */
-            updateImage: (options: Partial<SetImageAttrsOptions>) => ReturnType;
-            /**
-             * Set image alignment
-             */
-            setAlignImage: (align: 'left' | 'center' | 'right') => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        indent: {
-            /**
-             * Set the indent attribute
-             */
-            indent: () => ReturnType;
-            /**
-             * Set the outdent attribute
-             */
-            outdent: () => ReturnType;
+        mermaid: {
+            setMermaid: (options: any, replace?: any) => ReturnType;
+            setAlignImageMermaid: (align: 'left' | 'center' | 'right') => ReturnType;
         };
     }
 }
@@ -305,16 +315,6 @@ declare module '@tiptap/core' {
             goToPrevSearchResult: () => void;
             goToNextSearchResult: () => void;
             setCaseSensitive: (caseSensitive: boolean) => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        mermaid: {
-            setMermaid: (options: any, replace?: any) => ReturnType;
-            setAlignImageMermaid: (align: 'left' | 'center' | 'right') => ReturnType;
         };
     }
 }
