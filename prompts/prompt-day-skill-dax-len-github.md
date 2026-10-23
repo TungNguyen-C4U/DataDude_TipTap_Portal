@@ -3,7 +3,7 @@
 Dán nguyên đoạn dưới đây vào **Claude Code trên máy Windows**.
 
 ```text
-Tôi muốn đẩy skill Power BI DAX tạo sáng nay lên GitHub cá nhân (tài khoản: nlxuantung) để dùng chung giữa các máy và các session Claude Code trên đám mây. Làm lần lượt các bước sau:
+Tôi muốn đẩy skill Power BI DAX tạo sáng nay lên GitHub cá nhân (tài khoản: TungNguyen-C4U) để dùng chung giữa các máy và các session Claude Code trên đám mây. Làm lần lượt các bước sau:
 
 1. TÌM VÀ KIỂM TRA SKILL
 - Tìm các file SKILL.md trong %USERPROFILE%\.claude\skills\. Xác định skill DAX/Power BI tạo gần đây nhất. Nếu có nhiều hơn một skill phù hợp, hỏi tôi chọn skill nào.
@@ -29,7 +29,7 @@ Tôi muốn đẩy skill Power BI DAX tạo sáng nay lên GitHub cá nhân (tà
 - Nếu phát hiện bất cứ điều gì đáng ngờ, DỪNG LẠI và báo tôi.
 
 5. ĐẨY LÊN GITHUB
-- Repo tên: nlxuantung/claude-skills, chế độ PRIVATE.
+- Repo tên: TungNguyen-C4U/claude-skills, chế độ PRIVATE. Nếu repo này đã tồn tại, kiểm tra xem nó có đang private không: nếu đúng thì clone về và thêm skill vào .claude/skills/ (không ghi đè skill khác); nếu là public thì DỪNG và hỏi tôi.
 - Trước khi push, cho tôi xem danh sách file sẽ commit và CHỜ tôi xác nhận.
 - git init -b main, commit với message "Add Power BI DAX skill", thêm remote origin rồi push.
 
